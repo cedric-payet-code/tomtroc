@@ -1,0 +1,20 @@
+/*
+ * Playfair Display, auto-hébergée (pas de dépendance à fonts.googleapis.com).
+ * Télécharge les fichiers .woff2 depuis https://gwfh.mranftl.com/fonts/playfair-display
+ * et place-les dans assets/fonts/ avec ces noms exacts (ou adapte les url()).
+ */
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/playfair-display-v37-latin-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../fonts/playfair-display-v37-latin-600.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}

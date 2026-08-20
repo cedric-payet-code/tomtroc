@@ -1,0 +1,132 @@
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header {
+    background-color: var(--color-bg);
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo__mark {
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.logo__text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--color-primary);
+}
+
+.nav-main {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+}
+
+.nav-main__link {
+    color: var(--color-text-muted);
+}
+
+.nav-main__link.is-active {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.nav-secondary {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    padding-left: 28px;
+    border-left: 1px solid var(--color-border);
+}
+
+.nav-secondary__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer {
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    padding: 28px 0;
+}
+
+.footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 32px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.footer__logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-primary);
+    background: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+}
+
+@media (max-width: 860px) {
+    .header__inner {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .nav-secondary {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .footer__inner {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+}

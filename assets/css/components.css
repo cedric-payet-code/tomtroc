@@ -1,0 +1,76 @@
+/* ==========================================================================
+   BOUTONS
+   ========================================================================== */
+.button {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.button--primary {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+.button--primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.button--outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+}
+
+.button--outline:hover {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+/* ==========================================================================
+   CARTE LIVRE
+   ========================================================================== */
+.book-card__image {
+    width: 100%;
+    aspect-ratio: 4 / 3.3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+}
+
+.book-card__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 2px;
+}
+
+.book-card__author {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 12px;
+}
+
+.book-card__seller {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--color-text-faint);
+}
+
+/* ==========================================================================
+   CARTE ÉTAPE ("Comment ça marche ?")
+   ========================================================================== */
+.step-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

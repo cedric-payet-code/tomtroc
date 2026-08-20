@@ -1,0 +1,189 @@
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 64px;
+    padding: 72px 0 96px;
+}
+
+.hero__text {
+    flex: 1 1 420px;
+    max-width: 460px;
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero__description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+}
+
+.hero__figure {
+    flex: 1 1 480px;
+    max-width: 520px;
+}
+
+.hero__image {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    aspect-ratio: 4 / 3.7;
+    object-fit: cover;
+}
+
+.hero__credit {
+    margin-top: 8px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--color-text-faint);
+    text-align: right;
+}
+
+/* ==========================================================================
+   DERNIERS LIVRES AJOUTÉS
+   ========================================================================== */
+.latest-books {
+    background-color: var(--color-bg-soft);
+    padding: var(--section-padding-y) 0;
+}
+
+.latest-books .section-title {
+    margin-bottom: 56px;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 56px;
+}
+
+.latest-books__cta {
+    text-align: center;
+}
+
+/* ==========================================================================
+   COMMENT ÇA MARCHE
+   ========================================================================== */
+.how-it-works {
+    background-color: var(--color-bg-muted);
+    padding: var(--section-padding-y) 0;
+    text-align: center;
+}
+
+.how-it-works__intro {
+    max-width: 560px;
+    margin: 20px auto 48px;
+    color: var(--color-text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+/* ==========================================================================
+   BANDE IMAGE DÉCORATIVE
+   ========================================================================== */
+.divider-image {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ==========================================================================
+   NOS VALEURS
+   ========================================================================== */
+.values {
+    background-color: var(--color-bg);
+    padding: var(--section-padding-y) 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.values__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
+.values__content {
+    max-width: 560px;
+    position: relative;
+}
+
+.values__content p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+}
+
+.values__signature {
+    font-style: italic;
+    color: var(--color-text-faint);
+    margin-top: 24px;
+}
+
+.values__doodle {
+    position: absolute;
+    right: -50px;
+    bottom: -25px;
+    width: 90px;
+    height: auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 960px) {
+    .book-grid,
+    .step-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 860px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 48px 0 64px;
+    }
+
+    .hero__text {
+        max-width: 100%;
+    }
+
+    .hero__credit {
+        text-align: center;
+    }
+
+    .values__doodle {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .book-grid,
+    .step-grid {
+        grid-template-columns: 1fr;
+    }
+}

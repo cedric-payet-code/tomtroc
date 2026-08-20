@@ -19,8 +19,6 @@ class Router
 
     public function dispatch(string $uri): void
     {
-        // On retire le chemin du sous-dossier (ex: "/tomtroc") pour ne garder
-        // que la partie utile de l'URL, quel que soit l'emplacement du projet.
         $basePath = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
         $path = parse_url($uri, PHP_URL_PATH);
 
