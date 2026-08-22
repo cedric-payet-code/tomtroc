@@ -22,10 +22,25 @@
         <div class="book-grid">
             <?php foreach ($latestBooks as $book): ?>
                 <article class="book-card">
-                    <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture du livre <?= htmlspecialchars($book['title']) ?>" class="book-card__image">
-                    <h3 class="book-card__title"><?= htmlspecialchars($book['title']) ?></h3>
-                    <p class="book-card__author"><?= htmlspecialchars($book['author']) ?></p>
-                    <p class="book-card__seller">Vendu par : <?= htmlspecialchars($book['seller']) ?></p>
+
+                    <img
+                        src="assets/images/<?= htmlspecialchars($book->getImage() ?? '') ?>"
+                        alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
+                        class="book-card__image"
+                    >
+
+                    <h3 class="book-card__title">
+                        <?= htmlspecialchars($book->getTitle()) ?>
+                    </h3>
+
+                    <p class="book-card__author">
+                        <?= htmlspecialchars($book->getAuthor()) ?>
+                    </p>
+
+                    <p class="book-card__seller">
+                        Vendu par : seller_id
+                    </p>
+
                 </article>
             <?php endforeach; ?>
         </div>
