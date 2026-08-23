@@ -12,5 +12,8 @@ $router->add('', 'AccueilController', 'index');
 $router->add('accueil', 'AccueilController', 'index');
 $router->add('nos-livres', 'NosLivresController', 'index');
 $router->add('livre/{id}', 'LivreController', 'index');
+$router->add('inscription', 'InscriptionController', 'index');
+$router->add('connexion', 'ConnexionController', 'index');
+
 
 $router->dispatch($_SERVER['REQUEST_URI']);

@@ -24,30 +24,6 @@
    Volontairement HORS de .container : contrairement aux autres pages,
    cette section doit toucher les bords de l'écran (image "full bleed"),
    pas être limitée à 1200px de large. */
-.book-detail {
-    display: flex;
-    align-items: stretch;
-    min-height: 640px;
-}
-
-.book-detail__image-col {
-    flex: 1 1 50%;
-}
-
-.book-detail__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.book-detail__info-col {
-    flex: 1 1 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 64px 96px;
-}
 
 /* Réutilise --font-display comme .hero__title / .values__title,
    juste avec une taille différente propre à ce contexte */

@@ -2,12 +2,12 @@
     <a href="nos-livres">Nos livres</a> &gt; <?= htmlspecialchars($book->getTitle()) ?>
 </nav>
 
-<section class="book-detail">
-    <div class="book-detail__image-col">
-        <img src="assets/images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" class="book-detail__image">
+<section class="split-screen">
+    <div class="split-screen__image-col">
+        <img src="assets/images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" class="split-screen__image">
     </div>
 
-    <div class="book-detail__info-col">
+    <div class="split-screen__content-col">
         <h1 class="book-detail__title"><?= htmlspecialchars($book->getTitle()) ?></h1>
         <p class="book-detail__author">par <?= htmlspecialchars($book->getAuthor()) ?></p>
 
@@ -20,7 +20,6 @@
             <?php endforeach; ?>
         </div>
 
-        
         <div class="book-detail__owner">
             <p class="book-detail__label">Propriétaire</p>
             <a href="profil/<?= htmlspecialchars($owner->getId()) ?>" class="owner-card">

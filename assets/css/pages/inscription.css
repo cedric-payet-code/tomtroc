@@ -1,0 +1,35 @@
+/* ==========================================================================
+   INSCRIPTION / CONNEXION
+   Le layout (deux colonnes) vient de .split-screen (components.css),
+   les champs de .form-field (components.css) — il ne reste ici que
+   ce qui est vraiment propre à cette page.
+   ========================================================================== */
+
+/* Réutilise --font-display comme .book-detail__title, avec une taille
+   légèrement plus grande propre au contexte "page d'authentification" */
+.auth__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 34px;
+    color: var(--color-text);
+    margin-bottom: 40px;
+}
+
+.auth__form {
+    max-width: 340px;
+}
+
+.auth__submit {
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+.auth__footer-text {
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.auth__footer-text a {
+    color: var(--color-text);
+    text-decoration: underline;
+}
