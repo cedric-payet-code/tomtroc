@@ -7,8 +7,7 @@ class Book extends AbstractEntity
     private ?string $image = null;
     private ?string $description = null;
     private bool $available;
-
-    // private int $sellerId;
+    private int $ownerId;
 
     /**
      * Getter pour le titre.
@@ -115,17 +114,14 @@ class Book extends AbstractEntity
         $this->available = $available;
     }
 
-    /*
-    private int $sellerId;
-
-    public function getSellerId(): int
+    public function getOwnerId(): int
     {
-        return $this->sellerId;
+        return $this->ownerId;
     }
 
-    public function setSellerId(int $sellerId): void
+    public function setOwnerId(int $ownerId): void
     {
-        $this->sellerId = $sellerId;
+        $this->ownerId = $ownerId;
     }
-    */
+
 }

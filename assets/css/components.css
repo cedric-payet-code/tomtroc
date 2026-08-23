@@ -30,9 +30,23 @@
     color: #FFFFFF;
 }
 
+/* Modificateur : bouton en pleine largeur de son conteneur.
+   Utilisé pour "Envoyer un message" sur la fiche livre. */
+.button--block {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 18px 28px;
+}
+
 /* ==========================================================================
    CARTE LIVRE
    ========================================================================== */
+.book-card {
+    /* Nécessaire pour ancrer le badge "non dispo" en absolu par rapport à la carte */
+    position: relative;
+}
+
 .book-card__image {
     width: 100%;
     aspect-ratio: 4 / 3.3;
@@ -58,6 +72,28 @@
     font-size: 13px;
     font-style: italic;
     color: var(--color-text-faint);
+}
+
+/* Badge "non dispo" affiché en haut à droite de la couverture, utilisé
+   sur la page "Nos livres à l'échange" quand un livre n'est plus disponible */
+.book-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: #F3D6D6;
+    color: #A33A3A;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* Grille de cartes livres — réutilisée par la page d'accueil
+   ("Les derniers livres ajoutés") ET par "Nos livres à l'échange" */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
 }
 
 /* ==========================================================================

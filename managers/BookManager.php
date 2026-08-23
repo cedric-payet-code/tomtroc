@@ -6,6 +6,7 @@ class BookManager extends AbstractManager
     {
         $sql = "SELECT *
                 FROM books
+                WHERE available = 1
                 ORDER BY id DESC
                 LIMIT 4";
 
@@ -19,5 +20,55 @@ class BookManager extends AbstractManager
         }
 
         return $latestBooks;
+    }
+
+    public function getAllBooks(): array
+    {
+        $sql = "SELECT *
+                FROM books";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute();
+
+        $availableBooks = [];
+
+        while ($data = $query->fetch()) {
+            $availableBooks[] = new Book($data);
+        }
+
+        return $availableBooks;
+    }
+
+    public function getAllBooksByTitle(string $search): array
+    {
+        $sql = "SELECT *
+                FROM books
+                WHERE title LIKE :search";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute(['search' => '%' . $search . '%']);
+
+        $books = [];
+
+        while ($data = $query->fetch()) {
+            $books[] = new Book($data);
+        }
+
+        return $books;
+    }
+
+    public function getBookById(string $id): Book
+    {
+        $sql = "SELECT *
+                FROM books
+                WHERE id = :id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute(['id' => $id]);
+        $data = $query->fetch();
+
+        $book = new Book($data);
+
+        return $book;
     }
 }

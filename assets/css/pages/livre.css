@@ -1,0 +1,134 @@
+/* ==========================================================================
+   FICHE LIVRE (détail)
+   ========================================================================== */
+
+/* Fil d'ariane ("Nos livres > Titre du livre").
+   Réutilise .container (base.css) pour garder le même alignement gauche
+   que le reste du site, uniquement pour cette ligne de navigation. */
+.breadcrumb {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 13px;
+    color: var(--color-text-faint);
+}
+
+.breadcrumb a {
+    color: var(--color-text-faint);
+}
+
+.breadcrumb a:hover {
+    color: var(--color-text-muted);
+}
+
+/* Mise en page principale : deux colonnes plein écran (image / infos).
+   Volontairement HORS de .container : contrairement aux autres pages,
+   cette section doit toucher les bords de l'écran (image "full bleed"),
+   pas être limitée à 1200px de large. */
+.book-detail {
+    display: flex;
+    align-items: stretch;
+    min-height: 640px;
+}
+
+.book-detail__image-col {
+    flex: 1 1 50%;
+}
+
+.book-detail__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.book-detail__info-col {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 96px;
+}
+
+/* Réutilise --font-display comme .hero__title / .values__title,
+   juste avec une taille différente propre à ce contexte */
+.book-detail__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.book-detail__author {
+    font-size: 15px;
+    color: var(--color-text-faint);
+    margin-bottom: 24px;
+}
+
+/* Petit trait de séparation décoratif sous l'auteur */
+.book-detail__divider {
+    width: 32px;
+    height: 2px;
+    background-color: var(--color-primary);
+    border: none;
+    margin-bottom: 32px;
+}
+
+/* Libellés "DESCRIPTION" / "PROPRIÉTAIRE" : petites majuscules espacées,
+   un style qu'on retrouve nulle part ailleurs sur le site pour l'instant */
+.book-detail__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 12px;
+}
+
+.book-detail__description p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+}
+
+.book-detail__owner {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.owner-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.owner-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.owner-card__name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 860px) {
+    .book-detail {
+        flex-direction: column;
+    }
+
+    .book-detail__image-col {
+        min-height: 320px;
+    }
+
+    .book-detail__info-col {
+        padding: 48px 24px;
+    }
+}

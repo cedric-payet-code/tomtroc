@@ -6,7 +6,7 @@
             lecture. Nous croyons en la magie du partage de connaissances et d'histoires à
             travers les livres.
         </p>
-        <a href="/livres" class="button button--primary">Découvrir</a>
+        <a href="nos-livres" class="button button--primary">Découvrir</a>
     </div>
 
     <figure class="hero__figure">
@@ -21,7 +21,7 @@
 
         <div class="book-grid">
             <?php foreach ($latestBooks as $book): ?>
-                <article class="book-card">
+                <a href="livre/<?= htmlspecialchars($book->getId()) ?>" class="book-card">
 
                     <img
                         src="assets/images/<?= htmlspecialchars($book->getImage() ?? '') ?>"
@@ -41,12 +41,12 @@
                         Vendu par : seller_id
                     </p>
 
-                </article>
+                </a>
             <?php endforeach; ?>
         </div>
 
         <div class="latest-books__cta">
-            <a href="/livres" class="button button--primary">Voir tous les livres</a>
+            <a href="nos-livres" class="button button--primary">Voir tous les livres</a>
         </div>
     </div>
 </section>
@@ -65,7 +65,7 @@
             <div class="step-card">Proposez un échange et discutez avec d'autres passionnés de lecture.</div>
         </div>
 
-        <a href="/livres" class="button button--outline">Voir tous les livres</a>
+        <a href="nos-livres" class="button button--outline">Voir tous les livres</a>
     </div>
 </section>
 

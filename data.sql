@@ -1,22 +1,41 @@
- DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    avatar VARCHAR(255) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, email, password, avatar) VALUES
+(
+    'John Doe',
+    'john.doe@mail.com',
+    'johndoe',
+    NULL
+);
 
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
 
-    -- utilisateur_id INT NOT NULL,
+    owner_id INT NOT NULL,
 
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
     image VARCHAR(255) NULL,
     description TEXT NULL,
-    available BOOLEAN NOT NULL DEFAULT FALSE
+    available BOOLEAN NOT NULL DEFAULT FALSE,
 
-    -- FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+    FOREIGN KEY (owner_id) REFERENCES users(id)
 );
 
-INSERT INTO books (title, author, image, description, available) VALUES
+INSERT INTO books (owner_id, title, author, image, description, available) VALUES
 
 (
+    1,
     'L’Étranger',
     'Albert Camus',
     'letranger.jpg',
@@ -25,6 +44,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Les Misérables',
     'Victor Hugo',
     'les-miserables.jpg',
@@ -33,6 +53,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Madame Bovary',
     'Gustave Flaubert',
     'madame-bovary.jpg',
@@ -41,6 +62,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Vingt mille lieues sous les mers',
     'Jules Verne',
     'vingt-mille-lieues-sous-les-mers.jpg',
@@ -49,6 +71,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Le Comte de Monte-Cristo',
     'Alexandre Dumas',
     'le-comte-de-monte-cristo.jpg',
@@ -57,6 +80,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Germinal',
     'Émile Zola',
     'germinal.jpg',
@@ -65,6 +89,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Candide',
     'Voltaire',
     'candide.jpg',
@@ -73,6 +98,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Harry Potter à l’école des sorciers',
     'J.K. Rowling',
     'harry-potter-a-lecole-des-sorciers.jpg',
@@ -81,6 +107,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     'Le Petit Prince',
     'Antoine de Saint-Exupéry',
     'le-petit-prince.png',
@@ -89,6 +116,7 @@ INSERT INTO books (title, author, image, description, available) VALUES
 ),
 
 (
+    1,
     '1984',
     'George Orwell',
     '',

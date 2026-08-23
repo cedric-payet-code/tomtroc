@@ -1,0 +1,62 @@
+/* ==========================================================================
+   NOS LIVRES À L'ÉCHANGE
+   ========================================================================== */
+
+/* En-tête de page : titre + barre de recherche sur la même ligne */
+.livres-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding-top: 64px;
+    padding-bottom: 48px;
+}
+
+.livres-header__title {
+    /* Réutilise la police et la couleur de titre définies dans base.css,
+       comme .section-title, mais aligné à gauche au lieu d'être centré */
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 34px;
+    color: var(--color-text);
+}
+
+/* Barre de recherche */
+.search-field {
+    position: relative;
+    flex-shrink: 0;
+    width: 320px;
+}
+
+.search-field__icon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: var(--color-text-faint);
+    pointer-events: none;
+}
+
+.search-field__input {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    padding: 12px 16px 12px 44px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+.search-field__input::placeholder {
+    color: var(--color-text-faint);
+}
+
+.search-field__input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.livres-grid-wrapper {
+    padding-bottom: 96px;
+}

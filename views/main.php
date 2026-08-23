@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/'; ?>
+    <base href="<?= htmlspecialchars($basePath) ?>">
     <title><?= htmlspecialchars($title ?? 'TomTroc') ?></title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <header class="header">
