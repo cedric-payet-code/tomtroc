@@ -43,7 +43,7 @@ class LivreController extends AbstractController
         }
 
         $this->render('livre/modification', [
-            'title' => 'Modification - ' . $book->getTitle(),
+            'title' => $book->getTitle(),
             'book' => $book,
             'owner' => $owner,
         ]);
