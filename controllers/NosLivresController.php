@@ -15,10 +15,23 @@ class NosLivresController extends AbstractController
             $books = $bookManager->getAllBooksByTitle($search);
         }
 
+        $booksWithOwner = [];
+
+        $userManager = new UserManager();
+
+        foreach ($books as $book) {
+            $owner = $userManager->getUserById($book->getOwnerId());
+
+            $booksWithOwner[] = [
+                'book' => $book,
+                'owner' => $owner,
+            ];
+        }
+
         $this->render('nos-livres/index', [
             'title' => 'Nos Livres',
             'search' => $search,
-            'books' => $books,
+            'booksWithOwner' => $booksWithOwner,
         ]);
     }
 }

@@ -43,6 +43,8 @@ button {
     --color-text-muted: #62605B;
     --color-text-faint: #96938B;
     --color-border: #E3DFD3;
+    --color-danger-bg: #F3D6D6;
+    --color-danger-text: #A33A3A;
 
     /* Typographie */
     --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;

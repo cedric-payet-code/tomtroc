@@ -9,26 +9,45 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
+<?php
+    $currentPath = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $currentPath = str_replace(trim($basePath, '/'), '', $currentPath);
+    $currentPath = trim($currentPath, '/');
+
+    function isCurrentPage(string $currentPath, string $route): string
+    {
+        return $currentPath === trim($route, '/') ? ' is-active' : '';
+    }
+?>
+
 <body>
 
     <header class="header">
         <div class="container header__inner">
-            <a href="/" class="logo">
+            <a href="accueil" class="logo">
                 <span class="logo__mark">Tt</span>
                 <span class="logo__text">Tom Troc</span>
             </a>
 
             <nav class="nav-main">
-                <a href="/" class="nav-main__link is-active">Accueil</a>
-                <a href="/livres" class="nav-main__link">Nos livres à l'échange</a>
+                <a href="accueil" class="nav-main__link<?= isCurrentPage($currentPath, '') || isCurrentPage($currentPath, 'accueil') ? ' is-active' : '' ?>">
+                    Accueil
+                </a>
+                <a href="nos-livres" class="nav-main__link<?= isCurrentPage($currentPath, 'nos-livres') ?>">Nos livres à l'échange</a>
             </nav>
 
             <nav class="nav-secondary">
                 <a href="/messagerie" class="nav-secondary__link">
                     Messagerie <span class="badge">1</span>
                 </a>
-                <a href="/compte" class="nav-secondary__link">Mon compte</a>
-                <a href="/connexion" class="nav-secondary__link">Connexion</a>
+                <a href="mon-compte" class="nav-secondary__link<?= isCurrentPage($currentPath, 'mon-compte') ?>">Mon compte</a>
+                <?php if (isset($_SESSION['user'])): ?>
+                    <a href="deconnexion" class="nav-secondary__link">Déconnexion</a>
+                <?php else: ?>
+                    <a href="connexion" class="nav-secondary__link<?= isCurrentPage($currentPath, 'connexion') ?>">
+                        <?= isset($_SESSION['user']) ? "Déconnexion" : "Connexion" ?>
+                    </a>
+                <?php endif; ?>
             </nav>
         </div>
     </header>

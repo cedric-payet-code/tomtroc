@@ -37,4 +37,13 @@ class ConnexionController extends AbstractController
         header('Location: ' . $basePath);
         exit;
     }
+
+    public function logout(): void
+    {
+        session_unset();
+        session_destroy();
+
+        header('Location: /projet-4-option-b/');
+        exit;
+    }
 }

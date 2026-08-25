@@ -50,10 +50,12 @@
     color: var(--color-text-muted);
 }
 
-.nav-main__link.is-active {
+.nav-main__link.is-active, .nav-secondary__link.is-active {
     color: var(--color-text);
     font-weight: 600;
 }
+
+
 
 .nav-secondary {
     display: flex;

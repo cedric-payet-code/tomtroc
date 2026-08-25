@@ -30,13 +30,25 @@ class UserManager extends AbstractManager
             return null;
         }
 
-        $user = new User();
-        $user->setId($data['id']);
-        $user->setUsername($data['username']);
-        $user->setEmail($data['email']);
-        $user->setPassword($data['password']);
-        $user->setAvatar($data['avatar']);
-        $user->setCreatedAt($data['created_at']);
+        $user = new User($data);
+
+        return $user;
+    }
+
+    public function getUserByUsername(string $username): ?User
+    {
+        $sql = "SELECT * FROM users WHERE username = :username";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute(['username' => $username]);
+
+        $data = $query->fetch();
+
+        if (!$data) {
+            return null;
+        }
+
+        $user = new User($data);
 
         return $user;
     }
@@ -54,4 +66,20 @@ class UserManager extends AbstractManager
         ]);
     }
     
+    public function updateUser(User $user): void
+    {
+        $sql = "UPDATE users
+                SET username = :username,
+                    email = :email,
+                    password = :password
+                WHERE id = :id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute([
+            'username' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'password' => $user->getPassword(),
+            'id' => $user->getId(),
+        ]);
+    }
 }

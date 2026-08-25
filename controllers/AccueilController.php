@@ -8,9 +8,22 @@ class AccueilController extends AbstractController
 
         $latestBooks = $bookManager->getLatestBooks();
 
+        $latestBooksWithOwner = [];
+
+        $userManager = new UserManager();
+
+        foreach ($latestBooks as $book) {
+            $owner = $userManager->getUserById($book->getOwnerId());
+
+            $latestBooksWithOwner[] = [
+                'book' => $book,
+                'owner' => $owner,
+            ];
+        }
+
         $this->render('accueil/index', [
             'title' => 'Accueil',
-            'latestBooks' => $latestBooks,
+            'latestBooksWithOwner' => $latestBooksWithOwner,
         ]);
     }
 }

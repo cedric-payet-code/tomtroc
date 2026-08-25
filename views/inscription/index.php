@@ -2,6 +2,14 @@
     <div class="split-screen__content-col">
         <h1 class="auth__title">Inscription</h1>
 
+        <?php if (!empty($errors)): ?>
+            <div class="auth__errors">
+                <?php foreach ($errors as $error): ?>
+                    <p><?= htmlspecialchars($error) ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
         <form class="auth__form" action="inscription" method="post">
             <div class="form-field">
                 <label for="username" class="form-field__label">Pseudo</label>

@@ -33,3 +33,19 @@
     color: var(--color-text);
     text-decoration: underline;
 }
+
+.auth__errors {
+    background-color: #F3D6D6;
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.auth__errors p {
+    font-size: 14px;
+    color: #A33A3A;
+}
+
+.auth__errors p:not(:last-child) {
+    margin-bottom: 4px;
+}

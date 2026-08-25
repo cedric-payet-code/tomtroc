@@ -1,0 +1,137 @@
+.account__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 34px;
+    color: var(--color-text);
+    padding-top: 64px;
+    margin-bottom: 32px;
+}
+
+.account__panels {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.profile-card {
+    flex: 1 1 360px;
+    text-align: center;
+}
+
+.profile-card__avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 12px;
+}
+
+.profile-card__edit-link {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    text-decoration: underline;
+}
+
+.profile-card__divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 24px 0;
+}
+
+.profile-card__username {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--color-text);
+    margin-bottom: 4px;
+}
+
+.profile-card__member-since {
+    font-size: 14px;
+    color: var(--color-text-faint);
+    margin-bottom: 24px;
+}
+
+.profile-card__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    margin-bottom: 8px;
+}
+
+.profile-card__book-count {
+    font-size: 15px;
+    color: var(--color-text);
+}
+
+.info-card {
+    flex: 1 1 480px;
+}
+
+.info-card__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 24px;
+}
+
+.account-books {
+    padding: 0;
+    overflow: hidden;
+}
+
+.account-books__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.account-books__table thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+    padding: 20px 24px;
+}
+
+.account-books__table tbody tr:nth-child(even) {
+    background-color: var(--color-bg-soft);
+}
+
+.account-books__table td {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    vertical-align: middle;
+}
+
+.account-books__thumbnail {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.account-books__description {
+    font-style: italic;
+    max-width: 280px;
+}
+
+.account-books__action-link {
+    font-size: 14px;
+    text-decoration: underline;
+    margin-right: 16px;
+}
+
+.account-books__action-link--delete {
+    color: #A33A3A;
+}
+
+@media (max-width: 860px) {
+    .account__panels {
+        flex-direction: column;
+    }
+}

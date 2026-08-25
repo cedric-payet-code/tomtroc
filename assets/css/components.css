@@ -80,8 +80,8 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    background-color: #F3D6D6;
-    color: #A33A3A;
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger-text);
     font-size: 12px;
     font-weight: 600;
     padding: 4px 10px;
@@ -177,4 +177,28 @@
 .form-field__input:focus {
     outline: none;
     border-color: var(--color-primary);
+}
+
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 40px;
+}
+
+.status-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+}
+
+.status-badge--available {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+}
+
+.status-badge--unavailable {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger-text);
 }

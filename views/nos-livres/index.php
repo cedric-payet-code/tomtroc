@@ -19,22 +19,28 @@
 
     <div class="livres-grid-wrapper">
         <div class="book-grid">
-            <?php foreach ($books as $book): ?>
-                <article class="book-card">
+            <?php foreach ($booksWithOwner as $bookWithOwner): ?>
+
+                <?php
+                    $book = $bookWithOwner['book'];
+                    $owner = $bookWithOwner['owner'];
+                ?>
+
+                <a href="livre/<?= htmlspecialchars($book->getId()) ?>" class="book-card">
                     <?php if (!$book->isAvailable()): ?>
                         <span class="book-card__badge">non dispo.</span>
                     <?php endif; ?>
 
                     <img
-                        src="assets/images/<?= htmlspecialchars($book->getImage() ?? '') ?>"
+                        src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>"
                         alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
                         class="book-card__image"
                     >
 
                     <h3 class="book-card__title"><?= htmlspecialchars($book->getTitle()) ?></h3>
                     <p class="book-card__author"><?= htmlspecialchars($book->getAuthor()) ?></p>
-                    <p class="book-card__seller">Vendu par : seller_id</p>
-                </article>
+                    <p class="book-card__seller">Vendu par : <?= htmlspecialchars($owner->getUsername()) ?></p>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>

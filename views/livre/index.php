@@ -4,7 +4,7 @@
 
 <section class="split-screen">
     <div class="split-screen__image-col">
-        <img src="assets/images/<?= htmlspecialchars($book->getImage()) ?>" alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" class="split-screen__image">
+        <img src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>" alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" class="split-screen__image">
     </div>
 
     <div class="split-screen__content-col">
@@ -23,7 +23,7 @@
         <div class="book-detail__owner">
             <p class="book-detail__label">Propriétaire</p>
             <a href="profil/<?= htmlspecialchars($owner->getId()) ?>" class="owner-card">
-                <img src="<?= htmlspecialchars($owner->getAvatar()) ?>" alt="Avatar de <?= htmlspecialchars($owner->getUsername()) ?>" class="owner-card__avatar">
+                <img src="assets/images/<?= htmlspecialchars($owner->getAvatar() ?? "profil.jpg") ?>" alt="Avatar de <?= htmlspecialchars($owner->getUsername()) ?>" class="owner-card__avatar">
                 <span class="owner-card__name"><?= htmlspecialchars($owner->getUsername()) ?></span>
             </a>
         </div>

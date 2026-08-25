@@ -71,4 +71,36 @@ class BookManager extends AbstractManager
 
         return $book;
     }
+
+    public function getBooksByOwnerId(string $ownerId): array
+    {
+        $sql = "SELECT *
+                FROM books
+                WHERE owner_id LIKE :owner_id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute(['owner_id' => $ownerId]);
+
+        $books = [];
+
+        while ($data = $query->fetch()) {
+            $books[] = new Book($data);
+        }
+
+        return $books;
+    }
+
+    public function deleteBook(string $id, int $ownerId): void
+    {
+        $sql = "DELETE FROM books
+                WHERE id = :id
+                AND owner_id = :owner_id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+
+        $query->execute([
+            'id' => $id,
+            'owner_id' => $ownerId
+        ]);
+    }
 }

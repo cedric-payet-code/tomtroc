@@ -20,11 +20,17 @@
         <h2 class="section-title">Les derniers livres ajoutés</h2>
 
         <div class="book-grid">
-            <?php foreach ($latestBooks as $book): ?>
+            <?php foreach ($latestBooksWithOwner as $latestBookWithOwner): ?>
+
+                <?php
+                    $book = $latestBookWithOwner['book'];
+                    $owner = $latestBookWithOwner['owner'];
+                ?>
+
                 <a href="livre/<?= htmlspecialchars($book->getId()) ?>" class="book-card">
 
                     <img
-                        src="assets/images/<?= htmlspecialchars($book->getImage() ?? '') ?>"
+                        src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>"
                         alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>"
                         class="book-card__image"
                     >
@@ -38,7 +44,7 @@
                     </p>
 
                     <p class="book-card__seller">
-                        Vendu par : seller_id
+                        Vendu par : <?= htmlspecialchars($owner->getUsername()) ?>
                     </p>
 
                 </a>

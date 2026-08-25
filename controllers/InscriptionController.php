@@ -44,6 +44,16 @@ class InscriptionController extends AbstractController
             return;
         }
 
+        if ($userManager->getUserByUsername($username)) {
+            $this->render('inscription/index', [
+                'title' => 'Inscription - TomTroc',
+                'errors' => ['Ce pseudo est déjà utilisé.'],
+                'username' => $username,
+                'email' => $email,
+            ]);
+            return;
+        }
+
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $user = new User();

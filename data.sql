@@ -14,7 +14,7 @@ INSERT INTO users (username, email, password, avatar) VALUES
 (
     'John Doe',
     'john.doe@mail.com',
-    'johndoe',
+    '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe',
     NULL
 );
 
@@ -38,7 +38,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'L’Étranger',
     'Albert Camus',
-    'letranger.jpg',
+    NULL,
     'Meursault mène une existence tranquille jusqu’au jour où un événement tragique bouleverse sa vie. Un roman emblématique de la littérature française.',
     FALSE
 ),
@@ -47,7 +47,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Les Misérables',
     'Victor Hugo',
-    'les-miserables.jpg',
+    NULL,
     'L’histoire de Jean Valjean, ancien forçat cherchant à se racheter, dans une France marquée par la pauvreté et les injustices sociales.',
     TRUE
 ),
@@ -56,7 +56,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Madame Bovary',
     'Gustave Flaubert',
-    'madame-bovary.jpg',
+    NULL,
     'Emma Bovary rêve d’une vie romantique et passionnée mais se retrouve confrontée à la banalité de son quotidien.',
     FALSE
 ),
@@ -65,7 +65,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Vingt mille lieues sous les mers',
     'Jules Verne',
-    'vingt-mille-lieues-sous-les-mers.jpg',
+    NULL,
     'Le professeur Aronnax et ses compagnons embarquent à bord du Nautilus, le mystérieux sous-marin du capitaine Nemo.',
     TRUE
 ),
@@ -74,7 +74,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Le Comte de Monte-Cristo',
     'Alexandre Dumas',
-    'le-comte-de-monte-cristo.jpg',
+    NULL,
     'Après avoir été injustement emprisonné, Edmond Dantès s’évade et prépare sa vengeance contre ceux qui ont détruit sa vie.',
     TRUE
 ),
@@ -83,7 +83,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Germinal',
     'Émile Zola',
-    'germinal.jpg',
+    NULL,
     'Étienne Lantier découvre les conditions de vie difficiles des mineurs du nord de la France et participe à leur lutte sociale.',
     FALSE
 ),
@@ -92,7 +92,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Candide',
     'Voltaire',
-    'candide.jpg',
+    NULL,
     'Candide voyage à travers le monde et découvre une succession de catastrophes qui remettent en question sa vision optimiste de l’existence.',
     TRUE
 ),
@@ -101,7 +101,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     'Harry Potter à l’école des sorciers',
     'J.K. Rowling',
-    'harry-potter-a-lecole-des-sorciers.jpg',
+    NULL,
     'Harry Potter découvre à onze ans qu’il est un sorcier et rejoint l’école de Poudlard, où il se lie d’amitié avec Ron et Hermione.',
     TRUE
 ),
@@ -119,7 +119,7 @@ INSERT INTO books (owner_id, title, author, image, description, available) VALUE
     1,
     '1984',
     'George Orwell',
-    '',
+    NULL,
     'Dans une société totalitaire contrôlée par Big Brother, Winston Smith tente de préserver sa liberté de pensée et découvre les dangers de la surveillance permanente.',
     FALSE
 );
