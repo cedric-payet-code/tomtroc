@@ -4,6 +4,11 @@ class InscriptionController extends AbstractController
 {
     public function index(): void
     {
+        if (isset($_SESSION['user'])) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath . 'mon-compte');
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->handleSubmit();
             return;
