@@ -1,0 +1,33 @@
+.edit-book__back-link {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--color-text-faint);
+    margin-bottom: 12px;
+}
+
+.edit-book__grid {
+    display: flex;
+    gap: 48px;
+}
+
+.edit-book__photo-col {
+    flex: 0 0 320px;
+}
+
+.edit-book__photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+}
+
+.edit-book__photo-link {
+    font-size: 13px;
+    color: var(--color-text-faint);
+    text-decoration: underline;
+}
+
+.edit-book__form-col {
+    flex: 1 1 auto;
+}

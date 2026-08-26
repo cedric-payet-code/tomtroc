@@ -103,4 +103,25 @@ class BookManager extends AbstractManager
             'owner_id' => $ownerId
         ]);
     }
+
+    public function updateBook(Book $book): void
+    {
+        $sql = "UPDATE books
+                SET title = :title,
+                    author = :author,
+                    image = :image,
+                    description = :description,
+                    available = :available
+                WHERE id = :id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute([
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'image' => $book->getImage(),
+            'description' => $book->getDescription(),
+            'available' => $book->isAvailable() ? 1 : 0,
+            'id' => $book->getId(),
+        ]);
+    }
 }
