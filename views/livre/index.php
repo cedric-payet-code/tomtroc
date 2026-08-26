@@ -22,7 +22,7 @@
 
         <div class="book-detail__owner">
             <p class="book-detail__label">Propriétaire</p>
-            <a href="profil/<?= htmlspecialchars($owner->getId()) ?>" class="owner-card">
+            <a href="compte/<?= htmlspecialchars($owner->getId()) ?>" class="owner-card">
                 <img src="assets/images/<?= htmlspecialchars($owner->getAvatar() ?? "profil.jpg") ?>" alt="Avatar de <?= htmlspecialchars($owner->getUsername()) ?>" class="owner-card__avatar">
                 <span class="owner-card__name"><?= htmlspecialchars($owner->getUsername()) ?></span>
             </a>

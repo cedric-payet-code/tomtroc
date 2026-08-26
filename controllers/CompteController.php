@@ -1,8 +1,29 @@
 <?php
 
-class MonCompteController extends AbstractController
+class CompteController extends AbstractController
 {
-    public function index(): void
+    public function compte(string $id): void
+    {
+        $userManager = new UserManager();
+        $user = $userManager->getUserById($id);
+
+        if ($user == null) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath);
+        }
+
+        if (isset($_SESSION['user']) && $id == $_SESSION['user']->getId()) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath . 'mon-compte');
+        }
+
+        $this->render('compte/compte', [
+            'title' => $user->getUsername(),
+            'user' => $user,
+        ]);
+    }
+
+    public function monCompte(): void
     {
         if (!isset($_SESSION['user'])) {
             header('Location: /projet-4-option-b/connexion');
@@ -32,7 +53,7 @@ class MonCompteController extends AbstractController
 
         $memberSince = $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
 
-        $this->render('mon-compte/index', [
+        $this->render('compte/mon-compte', [
             'title' => 'Mon Compte',
             'user' => $user,
             'books' => $userBooks,

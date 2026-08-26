@@ -21,7 +21,8 @@ $router->add('livre/{id}/delete', 'LivreController', 'delete');
 $router->add('inscription', 'InscriptionController', 'index');
 $router->add('connexion', 'ConnexionController', 'index');
 $router->add('deconnexion', 'ConnexionController', 'logout');
-$router->add('mon-compte', 'MonCompteController', 'index');
+$router->add('mon-compte', 'CompteController', 'monCompte');
+$router->add('compte/{id}', 'CompteController', 'compte');
 
 
 $router->dispatch($_SERVER['REQUEST_URI']);
