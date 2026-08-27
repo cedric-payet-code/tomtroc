@@ -7,7 +7,7 @@ class CompteController extends AbstractController
         $userManager = new UserManager();
         $user = $userManager->getUserById($id);
 
-        if ($user == null) {
+        if (!$user) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath);
         }
@@ -17,9 +17,14 @@ class CompteController extends AbstractController
             header('Location: ' . $basePath . 'mon-compte');
         }
 
+        $bookManager = new BookManager();
+        $books = $bookManager->getBooksByOwnerId($user->getId());
+
         $this->render('compte/compte', [
             'title' => $user->getUsername(),
             'user' => $user,
+            'books' => $books,
+            'memberSince' => $this->getMemberSince($user->getCreatedAt()),
         ]);
     }
 
@@ -45,21 +50,26 @@ class CompteController extends AbstractController
         }
 
         $bookManager = new BookManager();
-        $userBooks = $bookManager->getBooksByOwnerId($user->getId());
+        $books = $bookManager->getBooksByOwnerId($user->getId());
 
-        $created = new DateTime($user->getCreatedAt());
+        $this->render('compte/mon-compte', [
+            'title' => 'Mon Compte',
+            'user' => $user,
+            'books' => $books,
+            'memberSince' => $this->getMemberSince($user->getCreatedAt()),
+            'errors' => $errors,
+        ]);
+    }
+
+    private function getMemberSince($createdAt): string
+    {
+        $created = new DateTime($createdAt);
         $now = new DateTime();
         $interval = $created->diff($now);
 
         $memberSince = $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
 
-        $this->render('compte/mon-compte', [
-            'title' => 'Mon Compte',
-            'user' => $user,
-            'books' => $userBooks,
-            'memberSince' => $memberSince,
-            'errors' => $errors,
-        ]);
+        return $memberSince;
     }
 
     private function handleSubmit(): array

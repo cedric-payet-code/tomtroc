@@ -8,7 +8,8 @@ class LivreController extends AbstractController
         $book = $bookManager->getBookById($id);
 
         if (!$book) {
-            // livre introuvable, à gérer (404 ou redirection)
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath);
         }
 
         $userManager = new UserManager();
@@ -40,7 +41,7 @@ class LivreController extends AbstractController
 
         if (!$book || $book->getOwnerId() != $user->getId()) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'compte');
+            header('Location: ' . $basePath . 'mon-compte');
             exit;
         }
 

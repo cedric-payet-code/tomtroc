@@ -65,7 +65,11 @@
                         <td>
                             <img src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>" class="account-books__thumbnail">
                         </td>
-                        <td><?= htmlspecialchars($book->getTitle()) ?></td>
+                        <td>
+                            <a href="livre/<?= htmlspecialchars($book->getId()) ?>">
+                                <?= htmlspecialchars($book->getTitle()) ?>
+                            </a>
+                        </td>
                         <td><?= htmlspecialchars($book->getAuthor()) ?></td>
                         <td class="account-books__description">
                             <?= htmlspecialchars(mb_strimwidth($book->getDescription(), 0, 80, '...')) ?>
@@ -78,7 +82,7 @@
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href="livre/<?= htmlspecialchars($book->getId()) ?>/editer" class="account-books__action-link">Éditer</a>
+                            <a href="livre/<?= htmlspecialchars($book->getId()) ?>/update" class="account-books__action-link">Éditer</a>
                             <a href="livre/<?= htmlspecialchars($book->getId()) ?>/delete" class="account-books__action-link account-books__action-link--delete">Supprimer</a>
                         </td>
                     </tr>

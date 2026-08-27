@@ -66,6 +66,10 @@
     color: var(--color-text);
 }
 
+.profile-card__contact-button {
+    margin-top: 8px;
+}
+
 .info-card {
     flex: 1 1 480px;
 }

@@ -57,7 +57,7 @@ class BookManager extends AbstractManager
         return $books;
     }
 
-    public function getBookById(string $id): Book
+    public function getBookById(string $id): ?Book
     {
         $sql = "SELECT *
                 FROM books
@@ -66,6 +66,10 @@ class BookManager extends AbstractManager
         $query = $this->db->getPDO()->prepare($sql);
         $query->execute(['id' => $id]);
         $data = $query->fetch();
+
+        if (!$data) {
+            return null;
+        }
 
         $book = new Book($data);
 

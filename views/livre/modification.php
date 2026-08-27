@@ -1,5 +1,5 @@
 <div class="container">
-    <a href="compte" class="edit-book__back-link">&larr; retour</a>
+    <a href="mon-compte" class="edit-book__back-link">&larr; retour</a>
     <h1 class="page-title">Modifier les informations</h1>
 
     <div class="card">
