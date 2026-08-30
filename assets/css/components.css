@@ -39,19 +39,26 @@
     padding: 18px 28px;
 }
 
+.edit-book__form-col .button--block {
+    width: 70%;
+}
+
 /* ==========================================================================
    CARTE LIVRE
    ========================================================================== */
 .book-card {
     /* Nécessaire pour ancrer le badge "non dispo" en absolu par rapport à la carte */
     position: relative;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 4px 24px 0px #00000003;
+    padding-bottom: 16px;
 }
 
 .book-card__image {
     width: 100%;
     aspect-ratio: 4 / 3.3;
     object-fit: cover;
-    border-radius: var(--radius-sm);
     margin-bottom: 16px;
 }
 
@@ -60,18 +67,21 @@
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: 2px;
+    margin-left: 10px;
 }
 
 .book-card__author {
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: var(--color-text-faint);
     margin-bottom: 12px;
+    margin-left: 10px;
 }
 
 .book-card__seller {
     font-size: 13px;
     font-style: italic;
     color: var(--color-text-faint);
+    margin-left: 10px;
 }
 
 /* Badge "non dispo" affiché en haut à droite de la couverture, utilisé
@@ -105,7 +115,6 @@
     padding: 32px 24px;
     text-align: center;
     font-size: 15px;
-    color: var(--color-text);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,6 +148,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 64px 96px;
+    background-color: var(--color-bg-soft);
 }
 
 /* ==========================================================================
@@ -152,7 +162,7 @@
 .form-field__label {
     display: block;
     font-size: 14px;
-    color: var(--color-text-muted);
+    color: var(--color-text-faint);
     margin-bottom: 8px;
 }
  
@@ -162,12 +172,12 @@
 .form-field__input {
     width: 100%;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    border: 1px solid var(--color-form-fieldr-border);
+    background-color: var(--color-form-field);
     padding: 14px 16px;
     font-family: var(--font-body);
     font-size: 14px;
-    color: var(--color-text);
+    color: var(--color-text-muted);
 }
  
 .form-field__input::placeholder {
@@ -185,13 +195,13 @@
     min-height: 220px;
     resize: vertical;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    border: 1px solid var(--color-form-fieldr-border);
+    background-color: var(--color-form-field);
     padding: 14px 16px;
     font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.6;
-    color: var(--color-text);
+    color: var(--color-text-muted);
 }
 
 .form-field__textarea:focus {
@@ -203,12 +213,12 @@
 .form-field__select {
     width: 100%;
     border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+    border: 1px solid var(--color-form-fieldr-border);
+    background-color: var(--color-form-field);
     padding: 14px 16px;
     font-family: var(--font-body);
     font-size: 14px;
-    color: var(--color-text);
+    color: var(--color-text-muted);
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2362605B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -222,8 +232,8 @@
 
 .card {
     background-color: var(--color-surface);
-    border-radius: var(--radius-md);
-    padding: 40px;
+    border-radius: 20px;
+    padding: 50px;
 }
 
 .status-badge {

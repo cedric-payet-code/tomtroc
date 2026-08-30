@@ -45,7 +45,7 @@
 .book-detail__divider {
     width: 32px;
     height: 2px;
-    background-color: var(--color-primary);
+    background-color: var(--color-text-faint);
     border: none;
     margin-bottom: 32px;
 }
@@ -53,15 +53,14 @@
 /* Libellés "DESCRIPTION" / "PROPRIÉTAIRE" : petites majuscules espacées,
    un style qu'on retrouve nulle part ailleurs sur le site pour l'instant */
 .book-detail__label {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-text-faint);
     margin-bottom: 12px;
 }
 
-.book-detail__description p {
+.book-detail__description p:not(.book-detail__label) {
     font-size: 15px;
     line-height: 1.7;
     color: var(--color-text-muted);
@@ -69,14 +68,19 @@
 }
 
 .book-detail__owner {
-    margin-top: 32px;
-    margin-bottom: 32px;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    color: var(--color-text-muted);
 }
 
 .owner-card {
     display: flex;
     align-items: center;
     gap: 12px;
+    background-color: white;
+    padding: 7px 14px 7px 7px;
+    border-radius: 83px;
+    width: fit-content;
 }
 
 .owner-card__avatar {
@@ -89,7 +93,6 @@
 .owner-card__name {
     font-size: 15px;
     font-weight: 600;
-    color: var(--color-text);
 }
 
 /* ==========================================================================

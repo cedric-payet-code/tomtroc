@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container modification-container">
     <a href="mon-compte" class="edit-book__back-link">&larr; retour</a>
     <h1 class="page-title">Modifier les informations</h1>
 

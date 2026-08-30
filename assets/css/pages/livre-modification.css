@@ -7,27 +7,30 @@
 
 .edit-book__grid {
     display: flex;
-    gap: 48px;
+    gap: 150px;
 }
 
 .edit-book__photo-col {
-    flex: 0 0 320px;
+    /* flex: 0 0 320px; */
+    flex: 1 1;
 }
 
 .edit-book__photo {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: var(--radius-sm);
     margin-bottom: 12px;
 }
 
 .edit-book__photo-link {
     font-size: 13px;
-    color: var(--color-text-faint);
+    color: var(--color-text-muted);
     text-decoration: underline;
+    display: flex;
+    flex-direction: column;
+    text-align: end;
 }
 
 .edit-book__form-col {
-    flex: 1 1 auto;
+    flex: 1 1;
 }
