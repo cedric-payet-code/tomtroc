@@ -253,3 +253,9 @@
     background-color: var(--color-danger-bg);
     color: var(--color-danger-text);
 }
+
+.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
