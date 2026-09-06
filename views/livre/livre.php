@@ -1,3 +1,8 @@
+<?php
+    $book = $bookWithUser['book'];
+    $owner = $bookWithUser['owner'];
+?>
+
 <nav class="breadcrumb container">
     <a href="nos-livres">Nos livres</a> &gt; <?= htmlspecialchars($book->getTitle()) ?>
 </nav>

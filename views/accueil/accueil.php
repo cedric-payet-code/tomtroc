@@ -20,11 +20,11 @@
         <h2 class="section-title">Les derniers livres ajoutés</h2>
 
         <div class="book-grid">
-            <?php foreach ($latestBooksWithOwner as $latestBookWithOwner): ?>
+            <?php foreach ($latestBooks as $latestBook): ?>
 
                 <?php
-                    $book = $latestBookWithOwner['book'];
-                    $owner = $latestBookWithOwner['owner'];
+                    $book = $latestBook['book'];
+                    $owner = $latestBook['owner'];
                 ?>
 
                 <a href="livre/<?= htmlspecialchars($book->getId()) ?>" class="book-card">

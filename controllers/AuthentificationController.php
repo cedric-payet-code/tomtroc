@@ -1,8 +1,8 @@
 <?php
 
-class InscriptionController extends AbstractController
+class AuthentificationController extends AbstractController
 {
-    public function index(): void
+    public function inscription(): void
     {
         if (isset($_SESSION['user'])) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
@@ -10,16 +10,16 @@ class InscriptionController extends AbstractController
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->handleSubmit();
+            $this->handleSubmitInscription();
             return;
         }
 
-        $this->render('inscription/index', [
+        $this->render('authentification/inscription', [
             'title' => 'Inscription',
         ]);
     }
 
-    private function handleSubmit(): void
+    private function handleSubmitInscription(): void
     {
         $username = trim($_POST['username'] ?? '');
         $email = trim($_POST['email'] ?? '');
@@ -28,8 +28,8 @@ class InscriptionController extends AbstractController
         $errors = $this->validate($username, $email, $password);
 
         if (!empty($errors)) {
-            $this->render('inscription/index', [
-                'title' => 'Inscription - TomTroc',
+            $this->render('authentification/inscription', [
+                'title' => 'Inscription',
                 'errors' => $errors,
                 'username' => $username,
                 'email' => $email,
@@ -40,8 +40,8 @@ class InscriptionController extends AbstractController
         $userManager = new UserManager();
 
         if ($userManager->getUserByEmail($email)) {
-            $this->render('inscription/index', [
-                'title' => 'Inscription - TomTroc',
+            $this->render('authentification/inscription', [
+                'title' => 'Inscription',
                 'errors' => ['Un compte existe déjà avec cette adresse email.'],
                 'username' => $username,
                 'email' => $email,
@@ -50,8 +50,8 @@ class InscriptionController extends AbstractController
         }
 
         if ($userManager->getUserByUsername($username)) {
-            $this->render('inscription/index', [
-                'title' => 'Inscription - TomTroc',
+            $this->render('authentification/inscription', [
+                'title' => 'Inscription',
                 'errors' => ['Ce pseudo est déjà utilisé.'],
                 'username' => $username,
                 'email' => $email,
@@ -90,5 +90,55 @@ class InscriptionController extends AbstractController
         }
 
         return $errors;
+    }
+
+    public function connexion(): void
+    {
+        if (isset($_SESSION['user'])) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath . 'mon-compte');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->handleSubmitConnexion();
+            return;
+        }
+
+        $this->render('authentification/connexion', [
+            'title' => 'Connexion',
+        ]);
+    }
+
+    private function handleSubmitConnexion(): void
+    {
+        $email = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+
+        $userManager = new UserManager();
+        $user = $userManager->getUserByEmail($email);
+
+        if (!$user || !password_verify($password, $user->getPassword())) {
+            $this->render('authentification/index', [
+                'title' => 'Connexion',
+                'errors' => ['Email ou mot de passe incorrect.'],
+                'email' => $email,
+            ]);
+            return;
+        }
+
+        $_SESSION['user'] = $user;
+
+        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+        header('Location: ' . $basePath);
+        exit;
+    }
+
+    public function logout(): void
+    {
+        session_unset();
+        session_destroy();
+
+        header('Location: /projet-4-option-b/');
+        exit;
     }
 }

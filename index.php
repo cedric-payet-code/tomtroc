@@ -12,17 +12,22 @@ session_start();
 
 $router = new Router();
 
-$router->add('', 'AccueilController', 'index');
-$router->add('accueil', 'AccueilController', 'index');
-$router->add('nos-livres', 'NosLivresController', 'index');
-$router->add('livre/{id}', 'LivreController', 'index');
-$router->add('livre/{id}/update', 'LivreController', 'update');
-$router->add('livre/{id}/delete', 'LivreController', 'delete');
-$router->add('inscription', 'InscriptionController', 'index');
-$router->add('connexion', 'ConnexionController', 'index');
-$router->add('deconnexion', 'ConnexionController', 'logout');
-$router->add('mon-compte', 'CompteController', 'monCompte');
+$router->add('', 'AccueilController', 'accueil');
+$router->add('accueil', 'AccueilController', 'accueil');
+
+$router->add('nos-livres', 'LivreController', 'livres');
+$router->add('livre/{id}', 'LivreController', 'livre');
+$router->add('livre/{id}/update', 'LivreController', 'modification');
+$router->add('livre/{id}/delete', 'LivreController', 'suppression');
+
+$router->add('inscription', 'AuthentificationController', 'inscription');
+$router->add('connexion', 'AuthentificationController', 'connexion');
+$router->add('deconnexion', 'AuthentificationController', 'logout');
+
+
 $router->add('compte/{id}', 'CompteController', 'compte');
+$router->add('mon-compte', 'CompteController', 'monCompte');
+
 $router->add('message/{id}', 'MessageController', 'index');
 
 

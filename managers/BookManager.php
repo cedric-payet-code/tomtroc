@@ -4,10 +4,15 @@ class BookManager extends AbstractManager
 {
     public function getLatestBooks(): array
     {
-        $sql = "SELECT *
+        $sql = "SELECT
+                    books.*,
+                    users.id AS user_id,
+                    users.username,
+                    users.avatar
                 FROM books
-                WHERE available = 1
-                ORDER BY id DESC
+                JOIN users ON books.owner_id = users.id
+                WHERE books.available = 1
+                ORDER BY books.id DESC
                 LIMIT 4";
 
         $query = $this->db->getPDO()->prepare($sql);
@@ -16,45 +21,52 @@ class BookManager extends AbstractManager
         $latestBooks = [];
 
         while ($data = $query->fetch()) {
-            $latestBooks[] = new Book($data);
+            $book = new Book($data);
+
+            $owner = new User();
+            $owner->setId($data['user_id']);
+            $owner->setUsername($data['username']);
+
+            $latestBooks[] = [
+                'book' => $book,
+                'owner' => $owner,
+            ];
         }
 
         return $latestBooks;
     }
 
-    public function getAllBooks(): array
+    public function getBook(string $id): array
     {
-        $sql = "SELECT *
-                FROM books";
-
-        $query = $this->db->getPDO()->prepare($sql);
-        $query->execute();
-
-        $availableBooks = [];
-
-        while ($data = $query->fetch()) {
-            $availableBooks[] = new Book($data);
-        }
-
-        return $availableBooks;
-    }
-
-    public function getAllBooksByTitle(string $search): array
-    {
-        $sql = "SELECT *
+        $sql = "SELECT
+                    books.*,
+                    users.id AS user_id,
+                    users.username,
+                    users.avatar
                 FROM books
-                WHERE title LIKE :search";
+                JOIN users ON books.owner_id = users.id
+                WHERE books.id = :id";
 
         $query = $this->db->getPDO()->prepare($sql);
-        $query->execute(['search' => '%' . $search . '%']);
+        $query->execute(['id' => $id]);
+        $data = $query->fetch();
 
-        $books = [];
-
-        while ($data = $query->fetch()) {
-            $books[] = new Book($data);
+        if (!$data) {
+            return [];
         }
 
-        return $books;
+        $book = new Book($data);
+
+        $owner = new User();
+        $owner->setId($data['user_id']);
+        $owner->setUsername($data['username']);
+        $owner->setAvatar($data['avatar']);
+
+        return 
+        [
+            'book' => $book,
+            'owner' => $owner,
+        ];
     }
 
     public function getBookById(string $id): ?Book
@@ -68,12 +80,75 @@ class BookManager extends AbstractManager
         $data = $query->fetch();
 
         if (!$data) {
-            return null;
+            null;
         }
 
         $book = new Book($data);
 
         return $book;
+    }
+
+    public function getBooks(): array
+    {
+        $sql = "SELECT
+                    books.*,
+                    users.id AS user_id,
+                    users.username,
+                    users.avatar
+                FROM books
+                JOIN users ON books.owner_id = users.id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute();
+
+        $books = [];
+
+        while ($data = $query->fetch()) {
+            $book = new Book($data);
+
+            $owner = new User();
+            $owner->setId($data['user_id']);
+            $owner->setUsername($data['username']);
+
+            $books[] = [
+                'book' => $book,
+                'owner' => $owner,
+            ];
+        }
+
+        return $books;
+    }
+
+    public function getBooksByTitle(string $search): array
+    {
+         $sql = "SELECT
+                    books.*,
+                    users.id AS user_id,
+                    users.username,
+                    users.avatar
+                FROM books
+                JOIN users ON books.owner_id = users.id
+                WHERE title LIKE :search";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute(['search' => '%' . $search . '%']);
+
+        $books = [];
+
+        while ($data = $query->fetch()) {
+            $book = new Book($data);
+
+            $owner = new User();
+            $owner->setId($data['user_id']);
+            $owner->setUsername($data['username']);
+
+            $books[] = [
+                'book' => $book,
+                'owner' => $owner,
+            ];
+        }
+
+        return $books;
     }
 
     public function getBooksByOwnerId(string $ownerId): array
@@ -94,20 +169,6 @@ class BookManager extends AbstractManager
         return $books;
     }
 
-    public function deleteBook(string $id, int $ownerId): void
-    {
-        $sql = "DELETE FROM books
-                WHERE id = :id
-                AND owner_id = :owner_id";
-
-        $query = $this->db->getPDO()->prepare($sql);
-
-        $query->execute([
-            'id' => $id,
-            'owner_id' => $ownerId
-        ]);
-    }
-
     public function updateBook(Book $book): void
     {
         $sql = "UPDATE books
@@ -126,6 +187,20 @@ class BookManager extends AbstractManager
             'description' => $book->getDescription(),
             'available' => $book->isAvailable() ? 1 : 0,
             'id' => $book->getId(),
+        ]);
+    }
+
+    public function deleteBook(string $id, int $ownerId): void
+    {
+        $sql = "DELETE FROM books
+                WHERE id = :id
+                AND owner_id = :owner_id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+
+        $query->execute([
+            'id' => $id,
+            'owner_id' => $ownerId
         ]);
     }
 }

@@ -2,31 +2,44 @@
 
 class LivreController extends AbstractController
 {
-    public function index(string $id): void
+    public function livre(string $id): void
     {
         $bookManager = new BookManager();
-        $book = $bookManager->getBookById($id);
+        $bookWithUser = $bookManager->getBook($id);
 
-        if (!$book) {
+        if (!$bookWithUser) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath);
         }
 
-        $userManager = new UserManager();
-        $owner = $userManager->getUserById($book->getOwnerId());
-
-        if (!$owner) {
-            // utilisateur introuvable, à gérer (404 ou redirection) ???
-        }
-
-        $this->render('livre/index', [
-            'title' => $book->getTitle(),
-            'book' => $book,
-            'owner' => $owner,
+        $this->render('livre/livre', [
+            'title' => $bookWithUser['book']->getTitle(),
+            'bookWithUser' => $bookWithUser
         ]);
     }
 
-    public function update(string $id): void
+    public function livres(): void
+    {
+        $search = $_GET['q'] ?? '';
+
+        $bookManager = new BookManager();
+
+        $booksWithOwner = [];
+
+        if ($search == '') {
+            $booksWithOwner = $bookManager->getBooks();
+        } else {
+            $booksWithOwner = $bookManager->getBooksByTitle($search);
+        }
+
+        $this->render('livre/nos-livres', [
+            'title' => 'Nos Livres',
+            'search' => $search,
+            'booksWithOwner' => $booksWithOwner,
+        ]);
+    }
+
+    public function modification(string $id): void
     {
         if (!isset($_SESSION['user'])) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
@@ -105,7 +118,7 @@ class LivreController extends AbstractController
         exit;
     }
 
-    public function delete(string $id): void
+    public function suppression(string $id): void
     {
         if (!isset($_SESSION['user'])) {
             header('Location: /projet-4-option-b/connexion');
