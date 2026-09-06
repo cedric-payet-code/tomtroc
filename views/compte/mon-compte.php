@@ -12,38 +12,41 @@
             <p class="profile-card__member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
 
             <p class="profile-card__label">Bibliothèque</p>
-            <p class="profile-card__book-count"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+            <p class="profile-card__book-count"><img src="assets/images/bibliothèque.svg"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
         </div>
 
         <div class="card info-card">
-            <h2 class="info-card__title">Vos informations personnelles</h2>
+            <div class="info-card-content">
+                <h2 class="info-card__title">Vos informations personnelles</h2>
 
-            <?php if (!empty($errors)): ?>
-                <div class="auth__errors">
-                    <?php foreach ($errors as $error): ?>
-                        <p><?= htmlspecialchars($error) ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+                <?php if (!empty($errors)): ?>
+                    <div class="auth__errors">
+                        <?php foreach ($errors as $error): ?>
+                            <p><?= htmlspecialchars($error) ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
 
-            <form action="mon-compte" method="post">
-                <div class="form-field">
-                    <label for="email" class="form-field__label">Adresse email</label>
-                    <input type="email" name="email" id="email" class="form-field__input" value="<?= htmlspecialchars($user->getEmail()) ?>" required>
-                </div>
+                <form action="mon-compte" method="post">
+                    <div class="form-field">
+                        <label for="email" class="form-field__label">Adresse email</label>
+                        <input type="email" name="email" id="email" class="form-field__input" value="<?= htmlspecialchars($user->getEmail()) ?>" required>
+                    </div>
 
-                <div class="form-field">
-                    <label for="password" class="form-field__label">Mot de passe</label>
-                    <input type="password" name="password" id="password" class="form-field__input" placeholder="••••••••">
-                </div>
+                    <div class="form-field">
+                        <label for="password" class="form-field__label">Mot de passe</label>
+                        <input type="password" name="password" id="password" class="form-field__input" placeholder="••••••••">
+                    </div>
 
-                <div class="form-field">
-                    <label for="username" class="form-field__label">Pseudo</label>
-                    <input type="text" name="username" id="username" class="form-field__input" value="<?= htmlspecialchars($user->getUsername()) ?>" required>
-                </div>
+                    <div class="form-field">
+                        <label for="username" class="form-field__label">Pseudo</label>
+                        <input type="text" name="username" id="username" class="form-field__input" value="<?= htmlspecialchars($user->getUsername()) ?>" required>
+                    </div>
 
-                <button type="submit" class="button button--outline">Enregistrer</button>
-            </form>
+                    <button type="submit" class="button button--outline">Enregistrer</button>
+                </form>
+            
+            </div>
         </div>
     </div>
 
@@ -61,7 +64,7 @@
             </thead>
             <tbody>
                 <?php foreach ($books as $book): ?>
-                    <tr>
+                    <tr class="ligne-livre">
                         <td>
                             <img src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>" class="account-books__thumbnail">
                         </td>

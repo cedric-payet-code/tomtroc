@@ -30,7 +30,6 @@ CREATE TABLE chats (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL,
-    last_message_at TIMESTAMP NULL DEFAULT NULL,
 
     FOREIGN KEY (user1_id) REFERENCES users(id),
     FOREIGN KEY (user2_id) REFERENCES users(id),
@@ -50,7 +49,7 @@ CREATE TABLE messages (
     FOREIGN KEY (sender_id) REFERENCES users(id)
 );
 
-INSERT INTO chats (user1_id, user2_id, last_message_at) VALUES (1, 2, '2026-08-31 14:05:00');
+INSERT INTO chats (user1_id, user2_id, last_message_at) VALUES (1, 2);
 
 INSERT INTO messages (chat_id, sender_id, message, sent_at) VALUES
 (1, 1, 'Salut ! Ça va ?', '2026-08-31 14:00:00'),

@@ -46,7 +46,10 @@ button {
     --color-danger-bg: #C56D6D;
     --color-danger-text: white;
     --color-form-field: #EDF2F6;
-    --color-form-fieldr-border: #F0F0F0;
+    --color-form-field-border: #F0F0F0;
+    --color-disponible: #6DC5A1;
+    --color-indisponible: #C56D6D;
+    --color-supprimer: #CB2D2D;
 
     /* Typographie */
     --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;

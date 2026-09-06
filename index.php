@@ -23,6 +23,7 @@ $router->add('connexion', 'ConnexionController', 'index');
 $router->add('deconnexion', 'ConnexionController', 'logout');
 $router->add('mon-compte', 'CompteController', 'monCompte');
 $router->add('compte/{id}', 'CompteController', 'compte');
+$router->add('message/{id}', 'MessageController', 'index');
 
 
 $router->dispatch($_SERVER['REQUEST_URI']);

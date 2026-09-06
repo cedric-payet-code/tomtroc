@@ -13,12 +13,12 @@
         <form class="auth__form" action="connexion" method="post">
             <div class="form-field">
                 <label for="email" class="form-field__label">Adresse email</label>
-                <input type="email" name="email" id="email" class="form-field__input" value="<?= htmlspecialchars($email ?? '') ?>" required>
+                <input type="email" name="email" id="email" class="form-field__input light" value="<?= htmlspecialchars($email ?? '') ?>" required>
             </div>
 
             <div class="form-field">
                 <label for="password" class="form-field__label">Mot de passe</label>
-                <input type="password" name="password" id="password" class="form-field__input" required>
+                <input type="password" name="password" id="password" class="form-field__input light" required>
             </div>
 
             <button type="submit" class="button button--primary button--block auth__submit">

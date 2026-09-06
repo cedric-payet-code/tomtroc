@@ -9,7 +9,7 @@ class CompteController extends AbstractController
 
         if (!$user) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath);
+            header('Location: ' . $basePath . 'compte');
         }
 
         if (isset($_SESSION['user']) && $id == $_SESSION['user']->getId()) {

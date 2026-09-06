@@ -1,6 +1,4 @@
-<div class="container">
-    <h1 class="page-title">Profil de <?= htmlspecialchars($user->getUsername()) ?></h1>
-
+<div class="container compte-public">
     <div class="account__panels">
         <div class="card profile-card">
             <img src="assets/images/<?= htmlspecialchars($user->getAvatar() ?? 'profil.jpg') ?>" alt="Avatar de <?= htmlspecialchars($user->getUsername()) ?>" class="profile-card__avatar">
@@ -11,7 +9,7 @@
             <p class="profile-card__member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
 
             <p class="profile-card__label">Bibliothèque</p>
-            <p class="profile-card__book-count"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+            <p class="profile-card__book-count"><img src="assets/images/bibliothèque.svg"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
 
             <a href="messagerie/nouveau/<?= htmlspecialchars($user->getId()) ?>" class="button button--outline profile-card__contact-button">
                 Écrire un message
