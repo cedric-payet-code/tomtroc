@@ -4,7 +4,6 @@ class Chat extends AbstractEntity
 {
     private int $user1Id;
     private int $user2Id;
-    private ?string $lastMessageAt = null;
 
     /**
      * Getter pour le user1.
@@ -46,27 +45,6 @@ class Chat extends AbstractEntity
     public function setUser2Id(int $user2Id): void
     {
         $this->user2Id = $user2Id;
-    }
-
-    /**
-     * Getter pour le lastMessageAt.
-     *
-     * @return ?string
-     */
-    public function getLastMessageAt(): ?string
-    {
-        return $this->lastMessageAt;
-    }
-
-    /**
-     * Setter pour le lastMessageAt.
-     *
-     * @param int $lastMessageAt
-     * @return void
-     */
-    public function setLastMessageAt(?string $lastMessageAt): void
-    {
-        $this->lastMessageAt = $lastMessageAt;
     }
 
 }
