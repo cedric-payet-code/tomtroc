@@ -103,6 +103,7 @@
 .account-books {
     padding: 0;
     overflow: hidden;
+    width: 100%;
 }
 
 .account-books__table {

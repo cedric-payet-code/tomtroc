@@ -34,3 +34,8 @@
 .edit-book__form-col {
     flex: 1 1;
 }
+
+.edit-book-page {
+    background-color: var(--color-bg-soft);
+    min-height: 100%;
+}
