@@ -10,6 +10,7 @@ class LivreController extends AbstractController
         if (!$bookWithUser) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath);
+            exit;
         }
 
         $this->render('livre/livre', [

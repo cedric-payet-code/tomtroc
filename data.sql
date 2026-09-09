@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS chats;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS users;
 
@@ -49,7 +51,7 @@ CREATE TABLE messages (
     FOREIGN KEY (sender_id) REFERENCES users(id)
 );
 
-INSERT INTO chats (user1_id, user2_id, last_message_at) VALUES (1, 2);
+INSERT INTO chats (user1_id, user2_id) VALUES (1, 2);
 
 INSERT INTO messages (chat_id, sender_id, message, sent_at) VALUES
 (1, 1, 'Salut ! Ça va ?', '2026-08-31 14:00:00'),

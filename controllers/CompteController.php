@@ -9,12 +9,14 @@ class CompteController extends AbstractController
 
         if (!$user) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'compte');
+            header('Location: ' . $basePath);
+            exit;
         }
 
         if (isset($_SESSION['user']) && $id == $_SESSION['user']->getId()) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath . 'mon-compte');
+            exit;
         }
 
         $bookManager = new BookManager();
@@ -67,9 +69,15 @@ class CompteController extends AbstractController
         $now = new DateTime();
         $interval = $created->diff($now);
 
-        $memberSince = $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
+        if ($interval->y > 0) {
+            return $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
+        }
 
-        return $memberSince;
+        if ($interval->m > 0) {
+            return $interval->m . ' mois';
+        }
+
+        return $interval->d . ' jour' . ($interval->d > 1 ? 's' : '');
     }
 
     private function handleSubmit(): array

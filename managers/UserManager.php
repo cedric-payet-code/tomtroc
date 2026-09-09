@@ -2,7 +2,7 @@
 
 class UserManager extends AbstractManager
 {
-    public function getUserById(string $id): User
+    public function getUserById(string $id): ?User
     {
         $sql = "SELECT *
                 FROM users
@@ -11,6 +11,10 @@ class UserManager extends AbstractManager
         $query = $this->db->getPDO()->prepare($sql);
         $query->execute(['id' => $id]);
         $data = $query->fetch();
+
+        if (!$data) {
+            return null;
+        }
 
         $user = new User($data);
 

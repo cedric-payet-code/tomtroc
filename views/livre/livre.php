@@ -32,7 +32,7 @@
                 <span class="owner-card__name"><?= htmlspecialchars($owner->getUsername()) ?></span>
             </a>
         </div>
-        <a href="messagerie/nouveau/<?= htmlspecialchars($owner->getId()) ?>" class="button button--primary button--block">
+        <a href="message/<?= htmlspecialchars($owner->getId()) ?>/nouveau/" class="button button--primary button--block">
             Envoyer un message
         </a>
     </div>

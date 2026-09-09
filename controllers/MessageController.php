@@ -2,52 +2,70 @@
 
 class MessageController extends AbstractController
 {
-    public function index(string $id): void
+    public function message(?string $id = null): void
     {
-        $chatManager = new ChatManager();
+        $messageManager = new MessageManager();
         $userManager = new UserManager();
 
-        $chats = $chatManager->getAllChats();
+        if (!isset($_SESSION['user']) || $id == $_SESSION['user']->getId()) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath . 'mon-compte');
+            exit;
+        }
 
-        $chatsWithUser = [];
+        $user = $_SESSION['user'];
+
         $activeContact = null;
+        $activeMessages = [];
+        
+        if ($id) {
+            $activeContact = $userManager->getUserById($id);
 
-        foreach ($chats as $chat) {
-            if ($chat->getUser1Id() == $_SESSION['user']->getId()) {
-                $user = $userManager->getUserById($chat->getUser2Id());
-            } else {
-                $user = $userManager->getUserById($chat->getUser1Id());
-            }
-
-            $lastMessage = $chatManager->getLastMessageByChatId($chat->getId());
-
-            $chatsWithUser[] = [
-                'chat' => $chat,
-                'user' => $user,
-                'lastMessageAt' => $this->getFormattedSentAt($lastMessage->getSentAt()),
-                'lastMessage' => $lastMessage,
-            ];
-            
-            if ($chat->getId() == $id) {
-                $activeContact = $user;
+            if (!$activeContact) {
+                $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+                header('Location: ' . $basePath . 'message');
+                exit;
             }
         }
 
-        $activeChatMessages = $chatManager->getAllMessagesByChatId($id);
+        $chats = $messageManager->getChats($user->getId());
 
-        $this->render('message/index', [
+        foreach ($chats as $index => $chat) {
+            $chats[$index]['lastMessageAt'] =
+                $this->getFormattedSentAt(
+                    $chat['lastMessage']?->getSentAt()
+                );
+
+            if ($chat['user']->getId() == $id) {
+                $messages = $messageManager->getMessages($chat['chat']->getId());
+                
+                foreach ($messages as $message) {
+                    $sentAt = $this->getFormattedSentAt($message->getSentAt());
+
+                    $activeMessages[] = [
+                        'message' => $message,
+                        'sentAt' => $sentAt,
+                    ];
+                }
+            }
+        }
+
+        $this->render('message/message', [
             'title' => 'Messagerie',
-            'chatsWithUser' => $chatsWithUser,
             'activeChatId' => $id,
+            'chats' => $chats,
+            'activeMessages' => $activeMessages,
             'activeContact' => $activeContact,
-            'activeChatMessages' => $activeChatMessages,
-            'currentUser' => $_SESSION['user'],
         ]);
     }
 
-    private function getFormattedSentAt(string $sentAt): string
+    private function getFormattedSentAt(?string $sentAt): string
     {
-        $formattedsentAt = null;
+        if (!$sentAt) {
+            return "";
+        }
+
+        $formattedsentAt = "";
         $sent = new DateTime($sentAt);
         $now = new DateTime();
 
@@ -60,5 +78,49 @@ class MessageController extends AbstractController
         }
 
         return $formattedsentAt;
+    }
+
+    public function nouveau(string $id): void
+    {
+        $messageManager = new MessageManager();
+        // $userManager = new UserManager();
+        
+        $user1Id = null;
+        $user2Id = null;
+
+        if (!isset($_SESSION['user']) || $id == $_SESSION['user']->getId()) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath . 'mon-compte');
+            exit;
+        }
+
+        // if (!$userManager->getUserById($id)) {
+        //     $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+        //     header('Location: ' . $basePath . 'compte');
+        //     exit;
+        // }
+
+
+        if ($id < $_SESSION['user']->getId()) {
+            $user1Id = $id;
+            $user2Id = $_SESSION['user']->getId();
+        } else {
+            $user1Id = $_SESSION['user']->getId();
+            $user2Id = $id;
+        }
+
+        $chat = $messageManager->getChat($user1Id, $user2Id);
+
+        if ($chat) {
+            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+            header('Location: ' . $basePath . 'message/' . $chat->getId());
+            exit;
+        }
+
+        $chatId = $messageManager->createChat($user1Id, $user2Id);
+
+        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
+        header('Location: ' . $basePath . 'message/' . $chatId);
+        exit;
     }
 }

@@ -7,6 +7,7 @@ class AuthentificationController extends AbstractController
         if (isset($_SESSION['user'])) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath . 'mon-compte');
+            exit;
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -97,6 +98,7 @@ class AuthentificationController extends AbstractController
         if (isset($_SESSION['user'])) {
             $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath . 'mon-compte');
+            exit;
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -118,7 +120,7 @@ class AuthentificationController extends AbstractController
         $user = $userManager->getUserByEmail($email);
 
         if (!$user || !password_verify($password, $user->getPassword())) {
-            $this->render('authentification/index', [
+            $this->render('authentification/connexion', [
                 'title' => 'Connexion',
                 'errors' => ['Email ou mot de passe incorrect.'],
                 'email' => $email,
