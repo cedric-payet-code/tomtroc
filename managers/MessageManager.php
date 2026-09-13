@@ -2,7 +2,7 @@
 
 class MessageManager extends AbstractManager
 {
-    public function createChat(string $user1Id, string $user2Id): int
+    public function addChat(string $user1Id, string $user2Id): int
     {
         $sql = "INSERT INTO chats (user1_id, user2_id)
                 VALUES (:user1_id, :user2_id)";
@@ -29,6 +29,27 @@ class MessageManager extends AbstractManager
         $query->execute([
             'user1_id' => $user1Id,
             'user2_id' => $user2Id,
+        ]);
+
+        $data = $query->fetch();
+
+        if (!$data) {
+            return null;
+        }
+
+        return new Chat($data);
+    }
+
+    public function getChatById(string $id): ?Chat
+    {
+        $sql = "SELECT *
+                FROM chats
+                WHERE id = :id";
+
+        $query = $this->db->getPDO()->prepare($sql);
+
+        $query->execute([
+            'id' => $id,
         ]);
 
         $data = $query->fetch();
@@ -147,5 +168,50 @@ class MessageManager extends AbstractManager
         }
 
         return new Message($data);
+    }
+
+    public function addMessage(int $chatId, int $senderId, string $message): void
+    {
+        $sql = "INSERT INTO messages (chat_id, sender_id, message)
+                VALUES (:chatId, :senderId, :message)";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute([
+            'chatId' => $chatId,
+            'senderId' => $senderId,
+            'message' => $message,
+        ]);
+    }
+
+    public function countUnreadMessages(int $userId): int
+    {
+        $sql = "SELECT COUNT(*) AS unreadMessages
+                FROM messages
+                JOIN chats ON messages.chat_id = chats.id
+                WHERE messages.sender_id != :userId
+                AND messages.seen = 0
+                AND (chats.user1_id = :userId OR chats.user2_id = :userId)";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute(['userId' => $userId]);
+
+        $unreadMessages = (int) $query->fetch()['unreadMessages'];
+
+        return $unreadMessages;
+    }
+
+    public function setMessagesAsSeen(int $chatId, int $userId): void
+    {
+        $sql = "UPDATE messages
+                SET seen = 1
+                WHERE chat_id = :chatId
+                AND sender_id = :userId
+                AND seen = 0";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute([
+            'chatId' => $chatId,
+            'userId' => $userId,
+        ]);
     }
 }

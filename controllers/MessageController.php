@@ -8,8 +8,7 @@ class MessageController extends AbstractController
         $userManager = new UserManager();
 
         if (!isset($_SESSION['user']) || $id == $_SESSION['user']->getId()) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'mon-compte');
+            header('Location: /mon-compte');
             exit;
         }
 
@@ -22,8 +21,7 @@ class MessageController extends AbstractController
             $activeContact = $userManager->getUserById($id);
 
             if (!$activeContact) {
-                $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-                header('Location: ' . $basePath . 'message');
+                header('Location: /messages');
                 exit;
             }
         }
@@ -38,6 +36,7 @@ class MessageController extends AbstractController
 
             if ($chat['user']->getId() == $id) {
                 $messages = $messageManager->getMessages($chat['chat']->getId());
+                $messageManager->setMessagesAsSeen($chat['chat']->getId(), $id);
                 
                 foreach ($messages as $message) {
                     $sentAt = $this->getFormattedSentAt($message->getSentAt());
@@ -52,7 +51,6 @@ class MessageController extends AbstractController
 
         $this->render('message/message', [
             'title' => 'Messagerie',
-            'activeChatId' => $id,
             'chats' => $chats,
             'activeMessages' => $activeMessages,
             'activeContact' => $activeContact,
@@ -89,8 +87,7 @@ class MessageController extends AbstractController
         $user2Id = null;
 
         if (!isset($_SESSION['user']) || $id == $_SESSION['user']->getId()) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'mon-compte');
+            header('Location: /mon-compte');
             exit;
         }
 
@@ -112,15 +109,42 @@ class MessageController extends AbstractController
         $chat = $messageManager->getChat($user1Id, $user2Id);
 
         if ($chat) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
             header('Location: ' . $basePath . 'message/' . $chat->getId());
             exit;
         }
 
-        $chatId = $messageManager->createChat($user1Id, $user2Id);
+        $chatId = $messageManager->addChat($user1Id, $user2Id);
 
-        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-        header('Location: ' . $basePath . 'message/' . $chatId);
+        header('Location: message/' . $chatId);
+        exit;
+    }
+
+    public function envoyer(string $id): void
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /connexion');
+            exit;
+        }
+
+        $messageManager = new MessageManager();
+        $chat = $messageManager->getChatById($id);
+
+        $user = $_SESSION['user'];
+
+        if (!$chat) {
+            header('Location: /messages');
+            exit;
+        }
+
+        $message = trim($_POST['message'] ?? '');
+
+        if ($message !== '') {
+            $messageManager->addMessage((int) $id, $user->getId(), $message);
+        }
+
+        $idRedirection =  $user->getId() == $chat->getUser1Id() ? $chat->getUser2Id() : $chat->getUser1Id();
+        
+        header('Location: /message/' . $idRedirection);
         exit;
     }
 }
