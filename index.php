@@ -28,9 +28,10 @@ $router->add('deconnexion', 'AuthentificationController', 'logout');
 $router->add('compte/{id}', 'CompteController', 'compte');
 $router->add('mon-compte', 'CompteController', 'monCompte');
 
-$router->add('message', 'MessageController', 'message');
+$router->add('messages', 'MessageController', 'message');
 $router->add('message/{id}', 'MessageController', 'message');
 $router->add('message/{id}/nouveau', 'MessageController', 'nouveau');
+$router->add('message/{id}/envoyer', 'MessageController', 'envoyer');
 
 
 $router->dispatch($_SERVER['REQUEST_URI']);

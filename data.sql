@@ -46,6 +46,7 @@ CREATE TABLE messages (
     sender_id INT NOT NULL,
     message TEXT NOT NULL,
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    seen BOOLEAN NOT NULL DEFAULT FALSE,
 
     FOREIGN KEY (chat_id) REFERENCES chats(id),
     FOREIGN KEY (sender_id) REFERENCES users(id)

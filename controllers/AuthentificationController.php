@@ -5,8 +5,7 @@ class AuthentificationController extends AbstractController
     public function inscription(): void
     {
         if (isset($_SESSION['user'])) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'mon-compte');
+            header('Location: /mon-compte');
             exit;
         }
         
@@ -69,8 +68,7 @@ class AuthentificationController extends AbstractController
 
         $userManager->createUser($user);
 
-        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-        header('Location: ' . $basePath . 'connexion');
+        header('Location: /connexion');
         exit;
     }
 
@@ -96,8 +94,7 @@ class AuthentificationController extends AbstractController
     public function connexion(): void
     {
         if (isset($_SESSION['user'])) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'mon-compte');
+            header('Location: /mon-compte');
             exit;
         }
 
@@ -130,8 +127,7 @@ class AuthentificationController extends AbstractController
 
         $_SESSION['user'] = $user;
 
-        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-        header('Location: ' . $basePath);
+        header('Location: /accueil');
         exit;
     }
 
@@ -140,7 +136,7 @@ class AuthentificationController extends AbstractController
         session_unset();
         session_destroy();
 
-        header('Location: /projet-4-option-b/');
+        header('Location: /accueil');
         exit;
     }
 }

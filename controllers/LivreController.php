@@ -8,8 +8,7 @@ class LivreController extends AbstractController
         $bookWithUser = $bookManager->getBook($id);
 
         if (!$bookWithUser) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath);
+            header('Location: /accueil');
             exit;
         }
 
@@ -43,8 +42,7 @@ class LivreController extends AbstractController
     public function modification(string $id): void
     {
         if (!isset($_SESSION['user'])) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'connexion');
+            header('Location: /connexion');
             exit;
         }
 
@@ -54,8 +52,7 @@ class LivreController extends AbstractController
         $book = $bookManager->getBookById($id);
 
         if (!$book || $book->getOwnerId() != $user->getId()) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'mon-compte');
+            header('Location: /mon-compte');
             exit;
         }
 
@@ -114,15 +111,14 @@ class LivreController extends AbstractController
         $bookManager = new BookManager();
         $bookManager->updateBook($book);
 
-        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-        header('Location: ' . $basePath . 'livre/' . $book->getId() . '/update');
+        header('Location: livre/' . $book->getId() . '/update');
         exit;
     }
 
     public function suppression(string $id): void
     {
         if (!isset($_SESSION['user'])) {
-            header('Location: /projet-4-option-b/connexion');
+            header('Location: /connexion');
             exit;
         }
 
@@ -133,8 +129,7 @@ class LivreController extends AbstractController
             $_SESSION['user']->getId()
         );
 
-        $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-        header('Location: ' . $basePath . 'mon-compte');
+        header('Location: ' . BASE_URL . 'mon-compte');
         exit;
     }
 }

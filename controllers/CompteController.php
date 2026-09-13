@@ -8,14 +8,12 @@ class CompteController extends AbstractController
         $user = $userManager->getUserById($id);
 
         if (!$user) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath);
+            header('Location: accueil');
             exit;
         }
 
         if (isset($_SESSION['user']) && $id == $_SESSION['user']->getId()) {
-            $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-            header('Location: ' . $basePath . 'mon-compte');
+            header('Location: /mon-compte');
             exit;
         }
 
@@ -33,7 +31,7 @@ class CompteController extends AbstractController
     public function monCompte(): void
     {
         if (!isset($_SESSION['user'])) {
-            header('Location: /projet-4-option-b/connexion');
+            header('Location: /connexion');
             exit;
         }
 
@@ -45,8 +43,7 @@ class CompteController extends AbstractController
             $errors = $this->handleSubmit();
 
             if (empty($errors)) {
-                $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-                header('Location: ' . $basePath . 'mon-compte');
+                header('Location: /mon-compte');
                 exit;
             }
         }

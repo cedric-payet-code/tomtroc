@@ -37,8 +37,11 @@
             </nav>
 
             <nav class="nav-secondary">
-                <a href="/messagerie" class="nav-secondary__link">
-                    Messagerie <span class="badge">1</span>
+                <a href="messages" class="nav-secondary__link">
+                    Messagerie
+                    <?php if (isset($unreadMessages) && $unreadMessages > 0): ?>
+                        <span class="badge"><?= htmlspecialchars($unreadMessages) ?></span>
+                    <?php endif; ?>
                 </a>
                 <a href="mon-compte" class="nav-secondary__link<?= isCurrentPage($currentPath, 'mon-compte') ?>">Mon compte</a>
                 <?php if (isset($_SESSION['user'])): ?>
