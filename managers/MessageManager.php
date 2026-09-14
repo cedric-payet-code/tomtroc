@@ -86,7 +86,7 @@ class MessageManager extends AbstractManager
                 WHERE chats.user1_id = :user_id_1
                 OR chats.user2_id = :user_id_2
 
-                ORDER BY chats.id DESC";
+                ORDER BY messages.sent_at DESC";
 
         $query = $this->db->getPDO()->prepare($sql);
 

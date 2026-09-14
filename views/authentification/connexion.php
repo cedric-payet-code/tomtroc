@@ -10,7 +10,7 @@
             </div>
         <?php endif; ?>
 
-        <form class="auth__form" action="connexion" method="post">
+        <form class="auth__form" action="/connexion" method="post">
             <div class="form-field">
                 <label for="email" class="form-field__label">Adresse email</label>
                 <input type="email" name="email" id="email" class="form-field__input light" value="<?= htmlspecialchars($email ?? '') ?>" required>

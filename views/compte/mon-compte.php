@@ -27,7 +27,7 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="mon-compte" method="post">
+                <form action="/mon-compte" method="post">
                     <div class="form-field">
                         <label for="email" class="form-field__label">Adresse email</label>
                         <input type="email" name="email" id="email" class="form-field__input" value="<?= htmlspecialchars($user->getEmail()) ?>" required>

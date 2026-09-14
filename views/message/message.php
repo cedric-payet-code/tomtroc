@@ -20,7 +20,7 @@
                     <div class="chat-item__body">
                         <div class="chat-item__top">
                             <span class="chat-item__name"><?= htmlspecialchars($user->getUsername()) ?></span>
-                            <span class="chat-item__time"><?= htmlspecialchars($lastMessageAt) ?></span>
+                            <span class="chat-item__time"><?= htmlspecialchars(explode(' ', $lastMessageAt)[0]) ?></span>
                         </div>
                         <?php if ($lastMessage): ?>
                             <p class="chat-item__preview">

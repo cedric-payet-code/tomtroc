@@ -10,7 +10,7 @@
             </div>
         <?php endif; ?>
 
-        <form class="auth__form" action="inscription" method="post">
+        <form class="auth__form" action="/inscription" method="post">
             <div class="form-field">
                 <label for="username" class="form-field__label">Pseudo</label>
                 <input type="text" name="username" id="username" class="form-field__input light" value="<?= htmlspecialchars($username ?? '') ?>" required>

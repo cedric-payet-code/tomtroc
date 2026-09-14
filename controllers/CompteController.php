@@ -68,13 +68,11 @@ class CompteController extends AbstractController
 
         if ($interval->y > 0) {
             return $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
-        }
-
-        if ($interval->m > 0) {
+        } elseif ($interval->m > 0) {
             return $interval->m . ' mois';
+        } else {
+            return $interval->d . ' jour' . ($interval->d > 1 ? 's' : '');
         }
-
-        return $interval->d . ' jour' . ($interval->d > 1 ? 's' : '');
     }
 
     private function handleSubmit(): array

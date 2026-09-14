@@ -67,12 +67,12 @@ class MessageController extends AbstractController
         $sent = new DateTime($sentAt);
         $now = new DateTime();
 
-        if ($now->format('Y') != $sent->format('Y')) {
-            $formattedsentAt = $sent->format('d.m.Y');
-        } elseif ($now->format('d.m') == $sent->format('d.m')) {
+        if ($now->format('d.m.Y') == $sent->format('d.m.Y')) {
             $formattedsentAt = $sent->format('H:i');
+        } elseif ($now->format('Y') == $sent->format('Y')) {
+            $formattedsentAt = $sent->format('d.m H:i');
         } else {
-            $formattedsentAt = $sent->format('d.m');
+            $formattedsentAt = $sent->format('d.m.Y H:i');
         }
 
         return $formattedsentAt;

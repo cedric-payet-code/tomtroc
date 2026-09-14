@@ -4,7 +4,7 @@
         <h1 class="page-title">Modifier les informations</h1>
 
         <div class="card">
-            <form action="livre/<?= htmlspecialchars($book->getId()) ?>/update" method="post" enctype="multipart/form-data" class="edit-book__grid">
+            <form action="/livre/<?= htmlspecialchars($book->getId()) ?>/update" method="post" enctype="multipart/form-data" class="edit-book__grid">
 
                 <div class="edit-book__photo-col">
                     <p class="form-field__label">Photo</p>
