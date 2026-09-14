@@ -4,11 +4,13 @@
         <h1 class="page-title">Modifier les informations</h1>
 
         <div class="card">
-            <form action="/livre/<?= htmlspecialchars($book->getId()) ?>/update" method="post" enctype="multipart/form-data" class="edit-book__grid">
+            <form action="/livre/<?= htmlspecialchars($book->getId()) ?>/update" method="post" 
+                enctype="multipart/form-data" class="edit-book__grid">
 
                 <div class="edit-book__photo-col">
                     <p class="form-field__label">Photo</p>
-                    <img src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>" alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>" class="edit-book__photo">
+                    <img src="assets/images/<?= htmlspecialchars($book->getImage() ?? 'livre.jpg') ?>" 
+                        alt="Couverture de <?= htmlspecialchars($book->getTitle()) ?>" class="edit-book__photo" id="photo-preview">
                     <label for="photo" class="edit-book__photo-link" style="cursor: pointer;">Modifier la photo</label>
                     <input type="file" name="photo" id="photo" accept="image/*" style="display: none;">
                 </div>
@@ -43,3 +45,13 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById('photo').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        document.getElementById('photo-preview').src = URL.createObjectURL(file);
+    }
+});
+</script>

@@ -108,6 +108,15 @@ class CompteController extends AbstractController
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         }
 
+        if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+            $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+            $avatarName = uniqid('avatar_') . '.' . $extension;
+            $destination = dirname(__DIR__) . '/assets/images/' . $avatarName;
+            move_uploaded_file($_FILES['avatar']['tmp_name'], $destination);
+
+            $user->setAvatar($avatarName);
+        }
+
         $user->setUsername($username);
         $user->setEmail($email);
         $user->setPassword($hashedPassword);

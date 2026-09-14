@@ -111,7 +111,7 @@ class LivreController extends AbstractController
         $bookManager = new BookManager();
         $bookManager->updateBook($book);
 
-        header('Location: livre/' . $book->getId() . '/update');
+        header('Location: /livre/' . $book->getId());
         exit;
     }
 
@@ -129,7 +129,7 @@ class LivreController extends AbstractController
             $_SESSION['user']->getId()
         );
 
-        header('Location: ' . BASE_URL . 'mon-compte');
+        header('Location: /mon-compte');
         exit;
     }
 }

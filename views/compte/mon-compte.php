@@ -3,16 +3,20 @@
 
     <div class="account__panels">
         <div class="card profile-card">
-            <img src="assets/images/<?= htmlspecialchars($user->getAvatar() ?? 'profil.jpg') ?>" alt="Avatar de <?= htmlspecialchars($user->getUsername()) ?>" class="profile-card__avatar">
-            <a href="compte/avatar" class="profile-card__edit-link">modifier</a>
+            <form action="/mon-compte" method="post" enctype="multipart/form-data" id="profile-form">
+                <img src="assets/images/<?= htmlspecialchars($user->getAvatar() ?? 'profil.jpg') ?>" alt="Avatar de <?= htmlspecialchars($user->getUsername()) ?>" class="profile-card__avatar" id="avatar-preview">
 
-            <hr class="profile-card__divider">
+                <label for="avatar" class="profile-card__edit-link" style="cursor: pointer;">modifier</label>
+                <input type="file" name="avatar" id="avatar" accept="image/*" style="display: none;">
 
-            <p class="profile-card__username"><?= htmlspecialchars($user->getUsername()) ?></p>
-            <p class="profile-card__member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
+                <hr class="profile-card__divider">
 
-            <p class="profile-card__label">Bibliothèque</p>
-            <p class="profile-card__book-count"><img src="assets/images/bibliothèque.svg"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+                <p class="profile-card__username"><?= htmlspecialchars($user->getUsername()) ?></p>
+                <p class="profile-card__member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
+
+                <p class="profile-card__label">Bibliothèque</p>
+                <p class="profile-card__book-count"><img src="assets/images/bibliothèque.svg"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+            </form>
         </div>
 
         <div class="card info-card">
@@ -27,25 +31,22 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="/mon-compte" method="post">
-                    <div class="form-field">
-                        <label for="email" class="form-field__label">Adresse email</label>
-                        <input type="email" name="email" id="email" class="form-field__input" value="<?= htmlspecialchars($user->getEmail()) ?>" required>
-                    </div>
+                <div class="form-field">
+                    <label for="email" class="form-field__label">Adresse email</label>
+                    <input type="email" name="email" id="email" class="form-field__input" value="<?= htmlspecialchars($user->getEmail()) ?>" required form="profile-form">
+                </div>
 
-                    <div class="form-field">
-                        <label for="password" class="form-field__label">Mot de passe</label>
-                        <input type="password" name="password" id="password" class="form-field__input" placeholder="••••••••">
-                    </div>
+                <div class="form-field">
+                    <label for="password" class="form-field__label">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="form-field__input" placeholder="••••••••" form="profile-form">
+                </div>
 
-                    <div class="form-field">
-                        <label for="username" class="form-field__label">Pseudo</label>
-                        <input type="text" name="username" id="username" class="form-field__input" value="<?= htmlspecialchars($user->getUsername()) ?>" required>
-                    </div>
+                <div class="form-field">
+                    <label for="username" class="form-field__label">Pseudo</label>
+                    <input type="text" name="username" id="username" class="form-field__input" value="<?= htmlspecialchars($user->getUsername()) ?>" required form="profile-form">
+                </div>
 
-                    <button type="submit" class="button button--outline">Enregistrer</button>
-                </form>
-            
+                <button type="submit" class="button button--outline" form="profile-form">Enregistrer</button>
             </div>
         </div>
     </div>
@@ -94,3 +95,13 @@
         </table>
     </div>
 </div>
+
+<script>
+document.getElementById('avatar').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        document.getElementById('avatar-preview').src = URL.createObjectURL(file);
+    }
+});
+</script>

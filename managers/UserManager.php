@@ -75,7 +75,8 @@ class UserManager extends AbstractManager
         $sql = "UPDATE users
                 SET username = :username,
                     email = :email,
-                    password = :password
+                    password = :password,
+                    avatar = :avatar
                 WHERE id = :id";
 
         $query = $this->db->getPDO()->prepare($sql);
@@ -83,6 +84,7 @@ class UserManager extends AbstractManager
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'password' => $user->getPassword(),
+            'avatar' => $user->getAvatar(),
             'id' => $user->getId(),
         ]);
     }
