@@ -16,6 +16,7 @@ $router->add('', 'AccueilController', 'accueil');
 $router->add('accueil', 'AccueilController', 'accueil');
 
 $router->add('nos-livres', 'LivreController', 'livres');
+$router->add('livre/add', 'LivreController', 'ajouter');
 $router->add('livre/{id}', 'LivreController', 'livre');
 $router->add('livre/{id}/update', 'LivreController', 'modification');
 $router->add('livre/{id}/delete', 'LivreController', 'suppression');

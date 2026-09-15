@@ -179,6 +179,10 @@
     height: min-content;
 }
 
+.button--ajouter {
+    margin-bottom: 24px;
+}
+
 @media (max-width: 860px) {
     .account__panels {
         flex-direction: column;

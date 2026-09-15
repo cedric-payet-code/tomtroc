@@ -51,6 +51,8 @@
         </div>
     </div>
 
+    <a href="/livre/add" class="button button--primary button--ajouter">Ajouter un livre</a>
+
     <div class="card account-books">
         <table class="account-books__table">
             <thead>

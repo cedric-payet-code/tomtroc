@@ -203,4 +203,23 @@ class BookManager extends AbstractManager
             'owner_id' => $ownerId
         ]);
     }
+
+    public function createBook(Book $book): int
+    {
+        $sql = "INSERT INTO books (owner_id, title, author, image, description, available)
+                VALUES (:owner_id, :title, :author, :image, :description, :available)";
+
+        $query = $this->db->getPDO()->prepare($sql);
+        $query->execute([
+            'owner_id' => $book->getOwnerId(),
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'image' => $book->getImage(),
+            'description' => $book->getDescription(),
+            'available' => $book->isAvailable() ? 1 : 0,
+        ]);
+
+        return (int) $this->db->getPDO()->lastInsertId();
+    }
+    
 }

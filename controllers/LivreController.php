@@ -132,4 +132,70 @@ class LivreController extends AbstractController
         header('Location: /mon-compte');
         exit;
     }
+
+    public function ajouter(): void
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /connexion');
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->handleCreate();
+            return;
+        }
+
+        $this->render('livre/ajouter', [
+            'title' => 'Ajouter un livre',
+        ]);
+    }
+
+    private function handleCreate(): void
+    {
+        $title = trim($_POST['title'] ?? '');
+        $author = trim($_POST['author'] ?? '');
+        $description = trim($_POST['description'] ?? '');
+        $available = ($_POST['available'] ?? '1') === '1';
+
+        $errors = [];
+
+        if ($title === '') {
+            $errors[] = 'Le titre est obligatoire.';
+        }
+
+        if ($author === '') {
+            $errors[] = "L'auteur est obligatoire.";
+        }
+
+        if (!empty($errors)) {
+            $this->render('livre/ajouter', [
+                'title' => 'Ajouter un livre',
+                'errors' => $errors,
+            ]);
+            return;
+        }
+
+        $imageName = 'livre.jpg';
+
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+            $extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
+            $imageName = uniqid('book_') . '.' . $extension;
+            $destination = dirname(__DIR__) . '/assets/images/' . $imageName;
+            move_uploaded_file($_FILES['photo']['tmp_name'], $destination);
+        }
+
+        $book = new Book();
+        $book->setOwnerId($_SESSION['user']->getId());
+        $book->setTitle($title);
+        $book->setAuthor($author);
+        $book->setDescription($description);
+        $book->setAvailable($available);
+        $book->setImage($imageName);
+
+        $bookManager = new BookManager();
+        $newBookId = $bookManager->createBook($book);
+
+        header('Location: /livre/' . $newBookId);
+        exit;
+    }
 }
