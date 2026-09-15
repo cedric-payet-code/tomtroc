@@ -16,7 +16,11 @@
 
     function isCurrentPage(string $currentPath, string $route): string
     {
-        return $currentPath === trim($route, '/') ? ' is-active' : '';
+        $route = trim($route, '/');
+
+        return $currentPath === $route || str_starts_with($currentPath, $route . '/')
+            ? ' is-active'
+            : '';
     }
 ?>
 
@@ -25,32 +29,35 @@
     <header class="header">
         <div class="container header__inner">
             <a href="accueil" class="logo">
-                <span class="logo__mark">Tt</span>
-                <span class="logo__text">Tom Troc</span>
+                <img class="header__logo" src="assets/images/header-logo.png">
             </a>
-
-            <nav class="nav-main">
-                <a href="accueil" class="nav-main__link<?= isCurrentPage($currentPath, '') || isCurrentPage($currentPath, 'accueil') ? ' is-active' : '' ?>">
-                    Accueil
-                </a>
-                <a href="nos-livres" class="nav-main__link<?= isCurrentPage($currentPath, 'nos-livres') ?>">Nos livres à l'échange</a>
-            </nav>
-
-            <nav class="nav-secondary">
-                <a href="messages" class="nav-secondary__link">
-                    Messagerie
-                    <?php if (isset($unreadMessages) && $unreadMessages > 0): ?>
-                        <span class="badge"><?= htmlspecialchars($unreadMessages) ?></span>
-                    <?php endif; ?>
-                </a>
-                <a href="mon-compte" class="nav-secondary__link<?= isCurrentPage($currentPath, 'mon-compte') ?>">Mon compte</a>
-                <?php if (isset($_SESSION['user'])): ?>
-                    <a href="deconnexion" class="nav-secondary__link">Déconnexion</a>
-                <?php else: ?>
-                    <a href="connexion" class="nav-secondary__link<?= isCurrentPage($currentPath, 'connexion') ?>">
-                        <?= isset($_SESSION['user']) ? "Déconnexion" : "Connexion" ?>
+            <nav class="nav">
+                <nav class="nav-main">
+                    <a href="accueil" class="nav-main__link<?= isCurrentPage($currentPath, '') || isCurrentPage($currentPath, 'accueil') ? ' is-active' : '' ?>">
+                        Accueil
                     </a>
-                <?php endif; ?>
+                    <a href="nos-livres" class="nav-main__link<?= isCurrentPage($currentPath, 'nos-livres') ?>">Nos livres à l'échange</a>
+                </nav>
+
+                <nav class="nav-secondary">
+                    <a href="messages" class="nav-secondary__link<?= isCurrentPage($currentPath, 'messages') || isCurrentPage($currentPath, 'message') ? ' is-active' : '' ?>">
+                        <img src="assets/images/icone-messagerie.svg">
+                        Messagerie
+                        <?php if (isset($unreadMessages) && $unreadMessages > 0): ?>
+                            <span class="badge">
+                                <?= $unreadMessages > 99 ? '99+' : htmlspecialchars($unreadMessages) ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+                    <a href="mon-compte" class="nav-secondary__link<?= isCurrentPage($currentPath, 'mon-compte') ?>">Mon compte</a>
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <a href="deconnexion" class="nav-secondary__link">Déconnexion</a>
+                    <?php else: ?>
+                        <a href="connexion" class="nav-secondary__link<?= isCurrentPage($currentPath, 'connexion') ?>">
+                            <?= isset($_SESSION['user']) ? "Déconnexion" : "Connexion" ?>
+                        </a>
+                    <?php endif; ?>
+                </nav>
             </nav>
         </div>
     </header>
@@ -64,7 +71,9 @@
             <a href="/politique-confidentialite">Politique de confidentialité</a>
             <a href="/mentions-legales">Mentions légales</a>
             <span>Tom Troc©</span>
-            <span class="footer__logo">Tt</span>
+            <a href="accueil" class="logo">
+                <img class="footer__logo" src="assets/images/footer-logo.png">
+            </a>
         </div>
     </footer>
 

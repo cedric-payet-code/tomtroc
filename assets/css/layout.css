@@ -8,7 +8,7 @@
 .header__inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 24px 0;
 }
 
@@ -16,27 +16,22 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-right: 100px;
 }
 
-.logo__mark {
-    width: 36px;
-    height: 36px;
-    background-color: var(--color-primary);
-    color: #FFFFFF;
-    border-radius: 8px;
+.header__logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.nav {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.logo__text {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--color-primary);
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    color: var(--color-text-muted);
 }
 
 .nav-main {
@@ -46,23 +41,15 @@
     font-size: 15px;
 }
 
-.nav-main__link {
-    color: var(--color-text-muted);
-}
-
 .nav-main__link.is-active, .nav-secondary__link.is-active {
-    color: var(--color-text);
     font-weight: 600;
 }
-
-
 
 .nav-secondary {
     display: flex;
     align-items: center;
     gap: 28px;
     font-size: 15px;
-    color: var(--color-text-muted);
     padding-left: 28px;
     border-left: 1px solid var(--color-border);
 }
@@ -74,23 +61,27 @@
 }
 
 .badge {
-    background-color: var(--color-primary);
+    min-width: 10.5px;
+    height: 15px;
+    padding: 0 2px;
+
+    background-color: var(--color-text-muted);
     color: #FFFFFF;
-    font-size: 11px;
+    font-size: 8.25px;
     font-weight: 700;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: inline-flex;
+    border-radius: 6.75px;
+
+    display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 /* ==========================================================================
    FOOTER
    ========================================================================== */
 .footer {
-    background-color: var(--color-bg);
+    background-color: white;
     border-top: 1px solid var(--color-border);
     padding: 28px 0;
 }
@@ -101,18 +92,15 @@
     justify-content: flex-end;
     gap: 32px;
     font-size: 14px;
+    font-weight: 300;
     color: var(--color-text-muted);
 }
 
-.footer__logo {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--color-primary);
-    background: none;
+.footer__logo  {
+    height: 17px;
     width: auto;
-    height: auto;
-    border-radius: 0;
+    object-fit: contain;
+    display: block;
 }
 
 @media (max-width: 860px) {
