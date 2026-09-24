@@ -10,6 +10,10 @@
                     $user = $selectedChat['user'];
                     $lastMessage = $selectedChat['lastMessage'];
                     $lastMessageAt = $selectedChat['lastMessageAt'];
+
+                    if ($activeContact && $user->getId() === $activeContact->getId()) {
+                        $activeChat = $chat;
+                    }
                 ?>
 
                 <a href="message/<?= htmlspecialchars($user->getId()) ?>"
@@ -66,7 +70,7 @@
                     <?php endforeach; ?>
                 </div>
 
-                <form action="/message/<?= htmlspecialchars($chat->getId()) ?>/envoyer" method="post" class="chat-panel__form">
+                <form action="/message/<?= htmlspecialchars($activeChat->getId()) ?>/envoyer" method="post" class="chat-panel__form">
                     <input type="text" name="message" class="chat-input" placeholder="Tapez votre message ici" required>
                     <button type="submit" class="button button--primary chat-panel__submit">Envoyer</button>
                 </form>

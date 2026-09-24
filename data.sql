@@ -12,26 +12,20 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (username, email, password, avatar) VALUES
-(
-    'John Doe',
-    'john.doe@mail.com',
-    '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe',
-    NULL
-),
-
-(
-    'Autre',
-    'autre@mail.com',
-    '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe',
-    NULL
-);
+INSERT INTO users (username, email, password, avatar, created_at) VALUES
+('John Doe', 'john.doe@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-06-10 09:00:00'),
+('Alexlecture', 'alex.lecture@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-03-14 10:30:00'),
+('Nathalire', 'nathalie@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-01-22 08:15:00'),
+('Sas634', 'sas634@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-05-02 17:45:00'),
+('Hugo1990_12', 'hugo1990@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2024-11-30 12:00:00'),
+('CamilleClubLit', 'camille.club@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-07-18 14:20:00');
 
 
 CREATE TABLE chats (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user1_id INT NOT NULL,
     user2_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (user1_id) REFERENCES users(id),
     FOREIGN KEY (user2_id) REFERENCES users(id),
@@ -52,12 +46,29 @@ CREATE TABLE messages (
     FOREIGN KEY (sender_id) REFERENCES users(id)
 );
 
+-- Conversation entre John Doe (1) et Alexlecture (2)
 INSERT INTO chats (user1_id, user2_id) VALUES (1, 2);
 
-INSERT INTO messages (chat_id, sender_id, message, sent_at) VALUES
-(1, 1, 'Salut ! Ça va ?', '2026-08-31 14:00:00'),
-(1, 2, 'Salut ! Oui, ça va très bien et toi ?', '2026-08-31 14:02:00'),
-(1, 1, 'Ça va super, merci !', '2026-08-31 14:05:00');
+INSERT INTO messages (chat_id, sender_id, message, sent_at, seen) VALUES
+(1, 1, 'Salut ! Ça va ?', '2026-08-31 14:00:00', TRUE),
+(1, 2, 'Salut ! Oui, ça va très bien et toi ?', '2026-08-31 14:02:00', TRUE),
+(1, 1, 'Ça va super, merci !', '2026-08-31 14:05:00', TRUE),
+(1, 2, 'Toujours partant pour l\'échange de livre dont on parlait ?', '2026-09-01 09:12:00', FALSE);
+
+-- Conversation entre John Doe (1) et Nathalire (3)
+INSERT INTO chats (user1_id, user2_id) VALUES (1, 3);
+
+INSERT INTO messages (chat_id, sender_id, message, sent_at, seen) VALUES
+(2, 3, 'Bonjour, votre livre "Les Misérables" est-il toujours disponible ?', '2026-08-20 20:08:00', TRUE),
+(2, 1, 'Oui, tout à fait ! On peut se voir quand ça vous arrange.', '2026-08-20 20:15:00', TRUE),
+(2, 3, 'Parfait, je vous recontacte cette semaine.', '2026-08-20 20:17:00', FALSE);
+
+-- Conversation entre John Doe (1) et Sas634 (4)
+INSERT INTO chats (user1_id, user2_id) VALUES (1, 4);
+
+INSERT INTO messages (chat_id, sender_id, message, sent_at, seen) VALUES
+(3, 4, 'Salut, je suis intéressé par "Candide" !', '2026-08-15 15:08:00', TRUE),
+(3, 1, 'Avec plaisir, il est disponible.', '2026-08-15 16:30:00', TRUE);
 
 
 CREATE TABLE books (
@@ -76,92 +87,50 @@ CREATE TABLE books (
 
 INSERT INTO books (owner_id, title, author, image, description, available) VALUES
 
-(
-    1,
-    'L’Étranger',
-    'Albert Camus',
-    NULL,
-    'Meursault mène une existence tranquille jusqu’au jour où un événement tragique bouleverse sa vie. Un roman emblématique de la littérature française.',
-    FALSE
-),
+(1, 'L’Étranger', 'Albert Camus', NULL,
+'Meursault mène une existence tranquille jusqu’au jour où un événement tragique bouleverse sa vie. Un roman emblématique de la littérature française.',
+FALSE),
 
-(
-    1,
-    'Les Misérables',
-    'Victor Hugo',
-    NULL,
-    'L’histoire de Jean Valjean, ancien forçat cherchant à se racheter, dans une France marquée par la pauvreté et les injustices sociales.',
-    TRUE
-),
+(1, 'Les Misérables', 'Victor Hugo', NULL,
+'L’histoire de Jean Valjean, ancien forçat cherchant à se racheter, dans une France marquée par la pauvreté et les injustices sociales.',
+TRUE),
 
-(
-    1,
-    'Madame Bovary',
-    'Gustave Flaubert',
-    NULL,
-    'Emma Bovary rêve d’une vie romantique et passionnée mais se retrouve confrontée à la banalité de son quotidien.',
-    FALSE
-),
+(1, 'Madame Bovary', 'Gustave Flaubert', NULL,
+'Emma Bovary rêve d’une vie romantique et passionnée mais se retrouve confrontée à la banalité de son quotidien.',
+FALSE),
 
-(
-    1,
-    'Vingt mille lieues sous les mers',
-    'Jules Verne',
-    NULL,
-    'Le professeur Aronnax et ses compagnons embarquent à bord du Nautilus, le mystérieux sous-marin du capitaine Nemo.',
-    TRUE
-),
+(2, 'Vingt mille lieues sous les mers', 'Jules Verne', NULL,
+'Le professeur Aronnax et ses compagnons embarquent à bord du Nautilus, le mystérieux sous-marin du capitaine Nemo.',
+TRUE),
 
-(
-    1,
-    'Le Comte de Monte-Cristo',
-    'Alexandre Dumas',
-    NULL,
-    'Après avoir été injustement emprisonné, Edmond Dantès s’évade et prépare sa vengeance contre ceux qui ont détruit sa vie.',
-    TRUE
-),
+(2, 'Le Comte de Monte-Cristo', 'Alexandre Dumas', NULL,
+'Après avoir été injustement emprisonné, Edmond Dantès s’évade et prépare sa vengeance contre ceux qui ont détruit sa vie.',
+TRUE),
 
-(
-    1,
-    'Germinal',
-    'Émile Zola',
-    NULL,
-    'Étienne Lantier découvre les conditions de vie difficiles des mineurs du nord de la France et participe à leur lutte sociale.',
-    FALSE
-),
+(3, 'Germinal', 'Émile Zola', NULL,
+'Étienne Lantier découvre les conditions de vie difficiles des mineurs du nord de la France et participe à leur lutte sociale.',
+FALSE),
 
-(
-    1,
-    'Candide',
-    'Voltaire',
-    NULL,
-    'Candide voyage à travers le monde et découvre une succession de catastrophes qui remettent en question sa vision optimiste de l’existence.',
-    TRUE
-),
+(4, 'Candide', 'Voltaire', NULL,
+'Candide voyage à travers le monde et découvre une succession de catastrophes qui remettent en question sa vision optimiste de l’existence.',
+TRUE),
 
-(
-    1,
-    'Harry Potter à l’école des sorciers',
-    'J.K. Rowling',
-    NULL,
-    'Harry Potter découvre à onze ans qu’il est un sorcier et rejoint l’école de Poudlard, où il se lie d’amitié avec Ron et Hermione.',
-    TRUE
-),
+(5, 'Harry Potter à l’école des sorciers', 'J.K. Rowling', NULL,
+'Harry Potter découvre à onze ans qu’il est un sorcier et rejoint l’école de Poudlard, où il se lie d’amitié avec Ron et Hermione.',
+TRUE),
 
-(
-    1,
-    'Le Petit Prince',
-    'Antoine de Saint-Exupéry',
-    'le-petit-prince.png',
-    'Un aviateur perdu dans le désert rencontre un mystérieux petit prince venu d’une autre planète. Un récit poétique qui aborde l’amitié, l’amour et le sens de la vie.',
-    TRUE
-),
+(1, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 'le-petit-prince.png',
+'Un aviateur perdu dans le désert rencontre un mystérieux petit prince venu d’une autre planète. Un récit poétique qui aborde l’amitié, l’amour et le sens de la vie.',
+TRUE),
 
-(
-    1,
-    '1984',
-    'George Orwell',
-    NULL,
-    'Dans une société totalitaire contrôlée par Big Brother, Winston Smith tente de préserver sa liberté de pensée et découvre les dangers de la surveillance permanente.',
-    FALSE
-);
+(6, '1984', 'George Orwell', NULL,
+'Dans une société totalitaire contrôlée par Big Brother, Winston Smith tente de préserver sa liberté de pensée et découvre les dangers de la surveillance permanente.',
+FALSE),
+
+(2, 'The Kinfolk Table', 'Nathan Williams', NULL,
+'Un ouvrage qui célèbre l’art de recevoir simplement, autour de recettes conviviales et de moments partagés.',
+TRUE),
+
+(5, 'Milk & Honey', 'Rupi Kaur', NULL,
+'Un recueil de poésie qui explore la survie, la perte, l’amour et la féminité à travers des mots simples et puissants.',
+TRUE);
