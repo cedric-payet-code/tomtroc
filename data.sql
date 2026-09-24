@@ -13,12 +13,12 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, email, password, avatar, created_at) VALUES
-('John Doe', 'john.doe@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-06-10 09:00:00'),
-('Alexlecture', 'alex.lecture@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-03-14 10:30:00'),
-('Nathalire', 'nathalie@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-01-22 08:15:00'),
-('Sas634', 'sas634@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-05-02 17:45:00'),
-('Hugo1990_12', 'hugo1990@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2024-11-30 12:00:00'),
-('CamilleClubLit', 'camille.club@mail.com', '$2y$10$KreG4Paj3eoZzN0V7qCyFePu1/FZU7Z6WXBR/VPnoy8UQeq4M6JKe', NULL, '2025-07-18 14:20:00');
+('John Doe', 'john.doe@mail.com', '$2y$10$Tpo1mzgI26vAGlTeD5C2pevx3IcDnzBoEsBMfFQ3TwfodnmQkZiJO', NULL, '2025-06-10 09:00:00'),
+('Alexlecture', 'alex.lecture@mail.com', '$2y$10$Tpo1mzgI26vAGlTeD5C2pevx3IcDnzBoEsBMfFQ3TwfodnmQkZiJO', NULL, '2025-03-14 10:30:00'),
+('Nathalire', 'nathalie@mail.com', '$2y$10$Tpo1mzgI26vAGlTeD5C2pevx3IcDnzBoEsBMfFQ3TwfodnmQkZiJO', NULL, '2025-01-22 08:15:00'),
+('Sas634', 'sas634@mail.com', '$2y$10$Tpo1mzgI26vAGlTeD5C2pevx3IcDnzBoEsBMfFQ3TwfodnmQkZiJO', NULL, '2025-05-02 17:45:00'),
+('Hugo1990_12', 'hugo1990@mail.com', '$2y$10$Tpo1mzgI26vAGlTeD5C2pevx3IcDnzBoEsBMfFQ3TwfodnmQkZiJO', NULL, '2024-11-30 12:00:00'),
+('CamilleClubLit', 'camille.club@mail.com', '$2y$10$Tpo1mzgI26vAGlTeD5C2pevx3IcDnzBoEsBMfFQ3TwfodnmQkZiJO', NULL, '2025-07-18 14:20:00');
 
 
 CREATE TABLE chats (
