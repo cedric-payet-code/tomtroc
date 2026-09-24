@@ -25,5 +25,18 @@ abstract class AbstractController
 
         require dirname(__DIR__) . '/views/main.php';
     }
+
+    protected function deleteUploadedImage(?string $imageName, string $prefix): void
+    {
+        if ($imageName === null || !str_starts_with($imageName, $prefix)) {
+            return;
+        }
+
+        $path = dirname(__DIR__) . '/assets/images/' . basename($imageName);
+
+        if (is_file($path)) {
+            unlink($path);
+        }
+    }
 }
 

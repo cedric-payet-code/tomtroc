@@ -86,7 +86,7 @@ class BookManager extends AbstractManager
         $data = $query->fetch();
 
         if (!$data) {
-            null;
+            return null;
         }
 
         $book = new Book($data);

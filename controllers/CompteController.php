@@ -119,9 +119,10 @@ class CompteController extends AbstractController
             $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
             $avatarName = uniqid('avatar_') . '.' . $extension;
             $destination = dirname(__DIR__) . '/assets/images/' . $avatarName;
-            move_uploaded_file($_FILES['avatar']['tmp_name'], $destination);
-
-            $user->setAvatar($avatarName);
+            if (move_uploaded_file($_FILES['avatar']['tmp_name'], $destination)) {
+                $this->deleteUploadedImage($user->getAvatar(), 'avatar_');
+                $user->setAvatar($avatarName);
+            }
         }
 
         $user->setUsername($username);

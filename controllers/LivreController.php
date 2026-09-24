@@ -103,9 +103,13 @@ class LivreController extends AbstractController
 
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-            $imageName = uniqid('book_') . '.' . $extension;
-            $destination = dirname(__DIR__) . '/assets/images/' . $imageName;
-            move_uploaded_file($_FILES['photo']['tmp_name'], $destination);
+            $newImageName = uniqid('book_') . '.' . $extension;
+            $destination = dirname(__DIR__) . '/assets/images/' . $newImageName;
+
+            if (move_uploaded_file($_FILES['photo']['tmp_name'], $destination)) {
+                $this->deleteUploadedImage($imageName, 'book_');
+                $imageName = $newImageName;
+            }
         }
 
         $book->setTitle($title);
@@ -129,11 +133,20 @@ class LivreController extends AbstractController
         }
 
         $bookManager = new BookManager();
+        $book = $bookManager->getBookById($id);
+
+        // Seul le propriétaire peut supprimer le livre (et donc son image).
+        if (!$book || $book->getOwnerId() != $_SESSION['user']->getId()) {
+            header('Location: /mon-compte');
+            exit;
+        }
 
         $bookManager->deleteBook(
             $id,
             $_SESSION['user']->getId()
         );
+
+        $this->deleteUploadedImage($book->getImage(), 'book_');
 
         header('Location: /mon-compte');
         exit;
