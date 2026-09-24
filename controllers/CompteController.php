@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Managers\BookManager;
+use App\Managers\UserManager;
+use App\Services\AbstractController;
+use DateTime;
+
 class CompteController extends AbstractController
 {
     public function compte(string $id): void

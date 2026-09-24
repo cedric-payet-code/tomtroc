@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Managers;
+
+use App\Models\Chat;
+use App\Models\Message;
+use App\Models\User;
+use App\Services\AbstractManager;
+
 class MessageManager extends AbstractManager
 {
     public function addChat(string $user1Id, string $user2Id): int

@@ -1,32 +1,24 @@
 <?php
 
 /**
- * Système d'autoload.
+ * Système d'autoload conforme PSR-4.
+ * Le namespace racine "App\" correspond à la racine du projet :
+ * App\Controllers\LivreController => Controllers/LivreController.php
  */
-spl_autoload_register(function($className) {
+spl_autoload_register(function ($className) {
+    $prefix = 'App\\';
+    $baseDir = dirname(__DIR__) . '/';
 
-    // Services
-    if (file_exists('services/' . $className . '.php')) {
-        require_once 'services/' . $className . '.php';
+    // La classe n'appartient pas au namespace App : on laisse la main aux autres autoloaders.
+    if (strncmp($className, $prefix, strlen($prefix)) !== 0) {
+        return;
     }
 
-    // Models
-    if (file_exists('models/' . $className . '.php')) {
-        require_once 'models/' . $className . '.php';
-    }
+    // Retire le préfixe et transforme les "\" du namespace en "/" de chemin.
+    $relativeClass = substr($className, strlen($prefix));
+    $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
 
-    // Managers
-    if (file_exists('managers/' . $className . '.php')) {
-        require_once 'managers/' . $className . '.php';
-    }
-
-    // Controllers
-    if (file_exists('controllers/' . $className . '.php')) {
-        require_once 'controllers/' . $className . '.php';
-    }
-
-    // Views
-    if (file_exists('views/' . $className . '.php')) {
-        require_once 'views/' . $className . '.php';
+    if (file_exists($file)) {
+        require_once $file;
     }
 });

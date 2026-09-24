@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Services\AbstractController;
+
 class Erreur404Controller extends AbstractController
 {
     public function show(): void

@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use App\Services\AbstractEntity;
+
 class Chat extends AbstractEntity
 {
     private int $user1Id;

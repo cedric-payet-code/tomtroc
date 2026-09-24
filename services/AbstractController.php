@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Services;
+
+use App\Managers\MessageManager;
+
 abstract class AbstractController
 {
     protected function render(string $view, array $data = []): void

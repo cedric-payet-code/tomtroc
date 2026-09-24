@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Managers;
+
+use App\Models\User;
+use App\Services\AbstractManager;
+
 class UserManager extends AbstractManager
 {
     public function getUserById(string $id): ?User

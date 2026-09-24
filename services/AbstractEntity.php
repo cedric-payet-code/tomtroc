@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 abstract class AbstractEntity 
 {
     // Par défaut l'id vaut -1, ce qui permet de vérifier facilement si l'entité est nouvelle ou pas. 

@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use App\Services\AbstractEntity;
+
 class Book extends AbstractEntity
 {
     private string $title;

@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Managers;
+
+use App\Models\Book;
+use App\Models\User;
+use App\Services\AbstractManager;
+
 class BookManager extends AbstractManager
 {
     public function getLatestBooks(): array

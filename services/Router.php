@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Services;
+
+use App\Controllers\Erreur404Controller;
+
 class Router
 {
     private array $routes = [];

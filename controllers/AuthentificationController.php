@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Managers\UserManager;
+use App\Models\User;
+use App\Services\AbstractController;
+
 class AuthentificationController extends AbstractController
 {
     public function inscription(): void

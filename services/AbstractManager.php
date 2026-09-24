@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 /**
  * Classe abstraite qui représente un manager. Elle récupère automatiquement le gestionnaire de base de données. 
  */

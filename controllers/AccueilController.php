@@ -1,5 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Managers\BookManager;
+use App\Services\AbstractController;
+
 class AccueilController extends AbstractController
 {
     public function accueil(): void

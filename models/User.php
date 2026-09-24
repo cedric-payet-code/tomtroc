@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use App\Services\AbstractEntity;
+
 class User extends AbstractEntity
 {
     private string $username;

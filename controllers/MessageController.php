@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Managers\MessageManager;
+use App\Managers\UserManager;
+use App\Services\AbstractController;
+use DateTime;
+
 class MessageController extends AbstractController
 {
     public function message(?string $id = null): void

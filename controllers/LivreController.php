@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Managers\BookManager;
+use App\Models\Book;
+use App\Services\AbstractController;
+
 class LivreController extends AbstractController
 {
     public function livre(string $id): void
