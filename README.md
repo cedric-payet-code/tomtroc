@@ -14,7 +14,7 @@ Site de mise en relation entre lecteurs pour échanger des livres. Projet dével
 
 ### 1. Placer le projet dans MAMP
 
-Copiez le dossier du projet dans `htdocs` (le répertoire servi par MAMP), par exemple `C:\MAMP\htdocs\projet-4-option-b`.
+Copiez le dossier du projet dans `htdocs` (le répertoire servi par MAMP), par exemple `C:\MAMP\htdocs\tomtroc`.
 
 ### 2. Créer la base de données
 
@@ -37,7 +37,7 @@ define('DB_PASS', 'root'); // mot de passe par défaut de MAMP
 
 ### 4. Configurer un virtual host
 
-Le routeur s'appuie sur l'URL à partir de la racine du site : le projet doit donc être servi via un virtual host, et non via `localhost/projet-4-option-b`.
+Le routeur s'appuie sur l'URL à partir de la racine du site : le projet doit donc être servi via un virtual host, et non via `localhost/tomtroc`.
 
 1. Ouvrez le fichier des virtual hosts d'Apache :
    - Windows : `C:\MAMP\conf\apache\extra\httpd-vhosts.conf`
@@ -48,8 +48,8 @@ Le routeur s'appuie sur l'URL à partir de la racine du site : le projet doit do
    ```apache
    <VirtualHost *:80>
        ServerName tomtroc.local
-       DocumentRoot "C:/MAMP/htdocs/projet-4-option-b"
-       <Directory "C:/MAMP/htdocs/projet-4-option-b">
+       DocumentRoot "C:/MAMP/htdocs/tomtroc"
+       <Directory "C:/MAMP/htdocs/tomtroc">
            AllowOverride All
            Require all granted
        </Directory>
