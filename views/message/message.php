@@ -69,10 +69,20 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
-
+                
                 <form action="/message/<?= htmlspecialchars($activeChat->getId()) ?>/envoyer" method="post" class="chat-panel__form">
-                    <input type="text" name="message" class="chat-input" placeholder="Tapez votre message ici" required>
-                    <button type="submit" class="button button--primary chat-panel__submit">Envoyer</button>
+                    <label for="chat-message" class="visually-hidden">Votre message</label>
+                    <input
+                        type="text"
+                        id="chat-message"
+                        name="message"
+                        class="chat-input"
+                        placeholder="Tapez votre message ici"
+                        required
+                    >
+                    <button type="submit" class="button button--primary chat-panel__submit">
+                        Envoyer
+                    </button>
                 </form>
             <?php endif; ?>
         </section>

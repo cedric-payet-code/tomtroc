@@ -3,11 +3,13 @@
         <h1 class="livres-header__title">Nos livres à l'échange</h1>
 
         <form class="search-field" action="nos-livres" method="get">
+            <label for="search-book" class="visually-hidden">Rechercher un livre</label>
             <svg class="search-field__icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5"/>
                 <path d="M17 17L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
             <input
+                id="search-book"
                 type="text"
                 name="q"
                 class="search-field__input"

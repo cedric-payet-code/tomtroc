@@ -15,7 +15,7 @@
                 <p class="profile-card__member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
 
                 <p class="profile-card__label">Bibliothèque</p>
-                <p class="profile-card__book-count"><img src="assets/images/bibliothèque.svg"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+                <p class="profile-card__book-count"><img src="assets/images/bibliothèque.svg" alt="logo bibliothèque"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
             </form>
         </div>
 

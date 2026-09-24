@@ -29,7 +29,7 @@
     <header class="header">
         <div class="container header__inner">
             <a href="accueil" class="logo">
-                <img class="header__logo" src="assets/images/header-logo.png">
+                <img class="header__logo" src="assets/images/header-logo.png" alt="icone de Tomtroc">
             </a>
             <nav class="nav">
                 <nav class="nav-main">
@@ -41,7 +41,7 @@
 
                 <nav class="nav-secondary">
                     <a href="messages" class="nav-secondary__link<?= isCurrentPage($currentPath, 'messages') || isCurrentPage($currentPath, 'message') ? ' is-active' : '' ?>">
-                        <img src="assets/images/icone-messagerie.svg">
+                        <img src="assets/images/icone-messagerie.svg" alt="icone des messages">
                         Messagerie
                         <?php if (isset($unreadMessages) && $unreadMessages > 0): ?>
                             <span class="badge">
@@ -72,7 +72,7 @@
             <a href="/mentions-legales">Mentions légales</a>
             <span>Tom Troc©</span>
             <a href="accueil" class="logo">
-                <img class="footer__logo" src="assets/images/footer-logo.png">
+                <img class="footer__logo" src="assets/images/footer-logo.png" alt="icone de Tomtroc">
             </a>
         </div>
     </footer>
