@@ -6,14 +6,9 @@
             <?php foreach ($chats as $index => $selectedChat): ?>
 
                 <?php
-                    $chat = $selectedChat['chat'];
                     $user = $selectedChat['user'];
                     $lastMessage = $selectedChat['lastMessage'];
                     $lastMessageAt = $selectedChat['lastMessageAt'];
-
-                    if ($activeContact && $user->getId() === $activeContact->getId()) {
-                        $activeChat = $chat;
-                    }
                 ?>
 
                 <a href="message/<?= htmlspecialchars($user->getId()) ?>"

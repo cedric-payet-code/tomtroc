@@ -22,6 +22,7 @@ class MessageController extends AbstractController
         $user = $_SESSION['user'];
 
         $activeContact = null;
+        $activeChat = null;
         $activeMessages = [];
         
         if ($id) {
@@ -42,6 +43,7 @@ class MessageController extends AbstractController
                 );
 
             if ($chat['user']->getId() == $id) {
+                $activeChat = $chat['chat'];
                 $messages = $messageManager->getMessages($chat['chat']->getId());
                 $messageManager->setMessagesAsSeen($chat['chat']->getId(), $id);
                 
@@ -56,11 +58,18 @@ class MessageController extends AbstractController
             }
         }
 
+        // Pas encore de conversation avec ce contact : on passe par "nouveau" qui la crée.
+        if ($activeContact && !$activeChat) {
+            header('Location: /message/' . $id . '/nouveau');
+            exit;
+        }
+
         $this->render('message/message', [
             'title' => 'Messagerie',
             'chats' => $chats,
             'activeMessages' => $activeMessages,
             'activeContact' => $activeContact,
+            'activeChat' => $activeChat,
         ]);
     }
 
@@ -88,8 +97,8 @@ class MessageController extends AbstractController
     public function nouveau(string $id): void
     {
         $messageManager = new MessageManager();
-        // $userManager = new UserManager();
-        
+        $userManager = new UserManager();
+
         $user1Id = null;
         $user2Id = null;
 
@@ -98,12 +107,11 @@ class MessageController extends AbstractController
             exit;
         }
 
-        // if (!$userManager->getUserById($id)) {
-        //     $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/';
-        //     header('Location: ' . $basePath . 'compte');
-        //     exit;
-        // }
-
+        // On ne crée pas de conversation avec un utilisateur inexistant.
+        if (!$userManager->getUserById($id)) {
+            header('Location: /messages');
+            exit;
+        }
 
         if ($id < $_SESSION['user']->getId()) {
             $user1Id = $id;
@@ -113,16 +121,13 @@ class MessageController extends AbstractController
             $user2Id = $id;
         }
 
-        $chat = $messageManager->getChat($user1Id, $user2Id);
-
-        if ($chat) {
-            header('Location: ' . $basePath . 'message/' . $chat->getId());
-            exit;
+        // Crée la conversation seulement si elle n'existe pas encore.
+        if (!$messageManager->getChat($user1Id, $user2Id)) {
+            $messageManager->addChat($user1Id, $user2Id);
         }
 
-        $chatId = $messageManager->addChat($user1Id, $user2Id);
-
-        header('Location: message/' . $chatId);
+        // La route message/{id} attend l'id du contact, pas celui de la conversation.
+        header('Location: /message/' . $id);
         exit;
     }
 
